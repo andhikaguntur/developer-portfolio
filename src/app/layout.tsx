@@ -22,6 +22,7 @@ import Navbar from "@/components/layout/Navbar";
 import FloatingChat from "@/components/layout/FloatingChat";
 import LoadingBar from "@/components/layout/LoadingBar";
 import { Suspense } from "react";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function RootLayout({
   children,
@@ -63,6 +64,7 @@ export default function RootLayout({
             </main>
           </div>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
