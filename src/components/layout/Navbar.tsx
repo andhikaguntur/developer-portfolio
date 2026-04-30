@@ -14,7 +14,7 @@ import {
     Briefcase, 
     Mail,
     Github,
-    Twitter,
+    Instagram,
     Linkedin
 } from 'lucide-react';
 import Link from 'next/link';
@@ -31,7 +31,7 @@ const NAV_ITEMS = [
 
 const SOCIALS = [
     { name: 'GitHub', href: 'https://github.com', icon: Github },
-    { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
+    { name: 'Instagram', href: 'https://instagram.com', icon: Instagram },
     { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
 ];
 

@@ -20,6 +20,8 @@ export const metadata: Metadata = {
 import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/layout/Navbar";
 import FloatingChat from "@/components/layout/FloatingChat";
+import LoadingBar from "@/components/layout/LoadingBar";
+import { Suspense } from "react";
 
 export default function RootLayout({
   children,
@@ -32,6 +34,9 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased font-sans bg-muted/30 text-foreground transition-colors duration-300`}
       >
         <ThemeProvider>
+          <Suspense fallback={null}>
+            <LoadingBar />
+          </Suspense>
           <FloatingChat />
           <div className="flex flex-col min-h-screen">
             {/* Navigation */}
@@ -40,7 +45,7 @@ export default function RootLayout({
             {/* Main Content Area */}
             <main className="flex-1 w-full min-h-screen p-4 md:p-8 lg:px-12 flex flex-col items-center pt-24 lg:pt-32 pb-12">
               {/* Document/Paper Container */}
-              <div className="w-full max-w-[1400px] min-h-[calc(100vh-10rem)] bg-background border border-border/50 shadow-2xl shadow-foreground/5 rounded-3xl overflow-hidden relative group">
+              <div className="w-full max-w-[1400px] min-h-[calc(100vh-10rem)] bg-background border border-border/50 shadow-2xl shadow-foreground/5 rounded-3xl overflow-hidden relative">
                 {/* Subtle Paper Texture Overlay (optional via CSS) */}
                 <div className="absolute inset-0 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-[0.03] dark:opacity-[0.05]" />
 

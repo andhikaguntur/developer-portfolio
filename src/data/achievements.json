@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "year": "2025",
+        "title": "Hackathon Winner",
+        "organization": "Global AI Challenge",
+        "description": "Built an accessibility tool using computer vision.",
+        "icon": "Trophy",
+        "image": "https://cataas.com/cat?1"
+    },
+    {
+        "id": 2,
+        "year": "2024",
+        "title": "Senior Developer Certification",
+        "organization": "Tech Institute",
+        "description": "Advanced certification in full-stack architecture.",
+        "icon": "Award",
+        "image": "https://cataas.com/cat?2"
+    },
+    {
+        "id": 3,
+        "year": "2023",
+        "title": "Open Source Contributor",
+        "organization": "Major Framework",
+        "description": "Contributed core performance fixes to a popular React library.",
+        "icon": "Star",
+        "image": "https://cataas.com/cat?3"
+    },
+    {
+        "id": 4,
+        "year": "2022",
+        "title": "Best UI/UX Design",
+        "organization": "Web Awards",
+        "description": "Recognition for outstanding interface design in fintech.",
+        "icon": "Briefcase",
+        "image": "https://cataas.com/cat?4"
+    }
+]

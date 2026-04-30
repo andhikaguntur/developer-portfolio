@@ -1,49 +1,19 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
-
-
-
-const projects = [
-    {
-        title: "E-Commerce Dashboard",
-        description: "A comprehensive analytics dashboard for online retailers, featuring real-time data visualization and inventory management.",
-        stack: ["Next.js", "TypeScript", "Tremor", "Supabase"],
-        link: "https://github.com",
-        year: "2024"
-    },
-    {
-        title: "Social Graph API",
-        description: "High-performance backend service for mapping social connections using graph database technology.",
-        stack: ["Node.js", "Neo4j", "Docker", "Redis"],
-        link: "https://github.com",
-        year: "2023"
-    },
-    {
-        title: "Aesthetic Portfolio V1",
-        description: "My previous portfolio site exploring brutalist design trends and WebGL interactions.",
-        stack: ["React", "Three.js", "Tailwind"],
-        link: "https://github.com",
-        year: "2023"
-    },
-    {
-        title: "TaskFlow CLI",
-        description: "A command-line interface tool for developer productivity, managing local tasks and git workflows.",
-        stack: ["Rust", "Clap", "Tokio"],
-        link: "https://github.com",
-        year: "2022"
-    }
-];
-
+import { ArrowUpRight, Box } from 'lucide-react';
 import Link from 'next/link';
+import projectsData from '@/data/projects.json';
+import DetailModal from '@/components/shared/DetailModal';
 
 interface ProjectsProps {
     limit?: number;
 }
 
 export default function Projects({ limit }: ProjectsProps) {
-    const items = limit ? projects.slice(0, limit) : projects;
+    const [selectedProject, setSelectedProject] = useState<any>(null);
+    const items = limit ? projectsData.slice(0, limit) : projectsData;
 
     return (
         <section id="projects" className="section-padding bg-background">
@@ -67,13 +37,21 @@ export default function Projects({ limit }: ProjectsProps) {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.8, delay: index * 0.1 }}
-                            className="group flex flex-col bg-card border border-border rounded-3xl overflow-hidden card-hover"
+                            onClick={() => setSelectedProject(project)}
+                            className="group flex flex-col bg-card border border-border rounded-3xl overflow-hidden card-hover cursor-pointer"
                         >
                             <div className="aspect-video bg-muted relative overflow-hidden">
-                                {/* Image Placeholder */}
-                                <div className="absolute inset-0 flex items-center justify-center text-muted-foreground font-mono text-xs">
-                                    PROJECT_MOCKUP
-                                </div>
+                                {project.image ? (
+                                    <img 
+                                        src={project.image} 
+                                        alt={project.title} 
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    />
+                                ) : (
+                                    <div className="absolute inset-0 flex items-center justify-center text-muted-foreground font-mono text-xs uppercase tracking-widest">
+                                        {project.title.split(' ').join('_')}
+                                    </div>
+                                )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-60" />
                             </div>
 
@@ -85,27 +63,25 @@ export default function Projects({ limit }: ProjectsProps) {
                                     <span className="text-xs font-mono bg-muted px-2 py-1 rounded text-muted-foreground shrink-0 ml-2">{project.year}</span>
                                 </div>
 
-                                <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
+                                <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6 line-clamp-2">
                                     {project.description}
                                 </p>
 
                                 <div className="flex flex-wrap gap-2 mb-8 mt-auto">
-                                    {project.stack.map((tech) => (
+                                    {project.stack.slice(0, 3).map((tech) => (
                                         <span key={tech} className="px-2 py-1 bg-muted/50 text-[10px] font-bold uppercase tracking-widest rounded-md">
                                             {tech}
                                         </span>
                                     ))}
+                                    {project.stack.length > 3 && (
+                                        <span className="px-2 py-1 text-[10px] font-bold text-muted-foreground">+{project.stack.length - 3}</span>
+                                    )}
                                 </div>
 
                                 <div className="pt-4 border-t border-border">
-                                    <a
-                                        href={project.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground hover:gap-4 transition-all"
-                                    >
-                                        Explore <ArrowUpRight className="w-4 h-4" />
-                                    </a>
+                                    <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground group-hover:gap-4 transition-all">
+                                        View Details <ArrowUpRight className="w-4 h-4" />
+                                    </div>
                                 </div>
                             </div>
                         </motion.div>
@@ -120,8 +96,19 @@ export default function Projects({ limit }: ProjectsProps) {
                     </div>
                 )}
             </div>
+
+            <DetailModal 
+                isOpen={!!selectedProject}
+                onClose={() => setSelectedProject(null)}
+                title={selectedProject?.title}
+                description={selectedProject?.description}
+                year={selectedProject?.year}
+                stack={selectedProject?.stack}
+                github={selectedProject?.github}
+                live={selectedProject?.live}
+                image={selectedProject?.image}
+                icon={<Box size={24} />}
+            />
         </section>
     );
 }
-
-

@@ -1,0 +1,36 @@
+[
+    {
+        "title": "E-Commerce Dashboard",
+        "description": "A comprehensive analytics dashboard for online retailers, featuring real-time data visualization and inventory management.",
+        "stack": ["Next.js", "TypeScript", "Tremor", "Supabase"],
+        "github": "https://github.com",
+        "live": "https://example.com",
+        "image": "https://cataas.com/cat/gif?1",
+        "year": "2024"
+    },
+    {
+        "title": "Social Graph API",
+        "description": "High-performance backend service for mapping social connections using graph database technology.",
+        "stack": ["Node.js", "Neo4j", "Docker", "Redis"],
+        "github": "https://github.com",
+        "image": "https://cataas.com/cat/gif?2",
+        "year": "2023"
+    },
+    {
+        "title": "Aesthetic Portfolio V1",
+        "description": "My previous portfolio site exploring brutalist design trends and WebGL interactions.",
+        "stack": ["React", "Three.js", "Tailwind"],
+        "github": "https://github.com",
+        "live": "https://example.com",
+        "image": "https://cataas.com/cat/gif?3",
+        "year": "2023"
+    },
+    {
+        "title": "TaskFlow CLI",
+        "description": "A command-line interface tool for developer productivity, managing local tasks and git workflows.",
+        "stack": ["Rust", "Clap", "Tokio"],
+        "github": "https://github.com",
+        "image": "https://cataas.com/cat/gif?4",
+        "year": "2022"
+    }
+]

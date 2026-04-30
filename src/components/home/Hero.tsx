@@ -18,20 +18,28 @@ import {
     Briefcase,
     Mail,
     Github,
-    Twitter,
+    Instagram,
     Linkedin
 } from 'lucide-react';
 
 const SOCIALS = [
     { name: 'GitHub', href: 'https://github.com/andhikaguntur', icon: Github },
-    { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
+    { name: 'Instagram', href: 'https://instagram.com/andhikaguntur', icon: Instagram },
     { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
 ];
 
 import avatarImage from '../../assets/ppporto.jpg';
 
-// Looping Typewriter Effect
 function TypewriterEffect({ text }: { text: string }) {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) return <span className="inline-block">{text}</span>;
+
+    return <ActualTypewriter text={text} />;
+}
+
+function ActualTypewriter({ text }: { text: string }) {
     const [displayedText, setDisplayedText] = useState("");
     const [index, setIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -50,9 +58,9 @@ function TypewriterEffect({ text }: { text: string }) {
                 setIndex(index - 1);
             }, 100);
         } else if (index === text.length) {
-            timeout = setTimeout(() => setIsDeleting(true), 4000); // Wait 4 seconds before deleting
+            timeout = setTimeout(() => setIsDeleting(true), 4000);
         } else if (index === 0 && isDeleting) {
-            timeout = setTimeout(() => setIsDeleting(false), 500); // Brief pause before typing again
+            timeout = setTimeout(() => setIsDeleting(false), 500);
         }
 
         return () => clearTimeout(timeout);
@@ -164,19 +172,8 @@ export default function Hero() {
                         </div>
                         <div className="flex items-center gap-3 group">
                             <Mail size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                            <a href="mailto:hello@antigravity.dev" className="text-foreground font-medium hover:text-primary transition-colors">hello@antigravity.dev</a>
+                            <a href="mailto:hello@andhikaguntur.dev" className="text-foreground font-medium hover:text-primary transition-colors">hello@andhikaguntur.dev</a>
                         </div>
-                    </div>
-
-                    <div className="flex items-center justify-center md:justify-start gap-8 text-sm text-muted-foreground pt-6 border-t border-border/50">
-                        <motion.span whileHover={{ y: -2 }} className="flex flex-col items-center md:items-start cursor-pointer group">
-                            <span className="font-black font-heading text-2xl text-foreground group-hover:text-primary transition-colors">5</span>
-                            <span className="text-xs uppercase tracking-widest font-semibold">Yrs Exp</span>
-                        </motion.span>
-                        <motion.span whileHover={{ y: -2 }} className="flex flex-col items-center md:items-start cursor-pointer group">
-                            <span className="font-black font-heading text-2xl text-foreground group-hover:text-primary transition-colors">30+</span>
-                            <span className="text-xs uppercase tracking-widest font-semibold">Projects</span>
-                        </motion.span>
                     </div>
                 </motion.div>
 
@@ -209,10 +206,9 @@ export default function Hero() {
                         <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
                             <div>
                                 <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
-                                    Technical <span className="text-muted-foreground italic">Skills</span>
+                                    Skills <span className="text-muted-foreground italic">Overview</span>
                                 </h2>
                             </div>
-                            <span className="text-[10px] uppercase tracking-widest text-muted-foreground hover:text-primary cursor-pointer transition-colors font-bold pb-1">Customize Stack</span>
                         </div>
 
                         <div className="flex flex-col gap-8">
@@ -242,8 +238,8 @@ export default function Hero() {
                                     ].map((skill) => (
                                         <motion.div
                                             key={skill.name}
-                                            whileHover={{ scale: 1.05, backgroundColor: 'hsl(var(--muted))' }}
-                                            className="flex items-center gap-2.5 px-4 py-2.5 border border-border rounded-xl transition-colors cursor-default bg-background shadow-sm"
+                                            whileHover={{ scale: 1.05 }}
+                                            className="flex items-center gap-2.5 px-4 py-2.5 border border-border rounded-xl transition-all cursor-default bg-background shadow-sm hover:bg-muted"
                                         >
                                             <skill.icon size={18} className="text-primary" />
                                             <span className="text-sm font-semibold text-foreground tracking-wide">{skill.name}</span>
@@ -275,8 +271,8 @@ export default function Hero() {
                                     ].map((skill) => (
                                         <motion.span
                                             key={skill}
-                                            whileHover={{ scale: 1.05, borderColor: 'hsl(var(--primary))', color: 'hsl(var(--primary))' }}
-                                            className="px-5 py-2.5 text-sm font-bold tracking-wide border border-border bg-muted/30 rounded-xl text-foreground transition-colors cursor-default shadow-sm"
+                                            whileHover={{ scale: 1.05 }}
+                                            className="px-5 py-2.5 text-sm font-bold tracking-wide border border-border bg-muted/30 rounded-xl text-foreground transition-all cursor-default shadow-sm hover:border-primary hover:text-primary"
                                         >
                                             {skill}
                                         </motion.span>

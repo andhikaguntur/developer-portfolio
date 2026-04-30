@@ -8,7 +8,7 @@ import { sendChatMessage, ChatMessage } from '@/app/actions/chat';
 export default function FloatingChat() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<ChatMessage[]>([
-        { role: 'assistant', content: "Halo! Aku Mochi, asisten AI Andhika. Ada yang bisa aku bantu seputar portofolio ini?" }
+        { role: 'assistant', content: "Halo! Aku Mochika, asisten AI Andhika. Ada yang bisa aku bantu seputar portofolio ini?" }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -32,23 +32,23 @@ export default function FloatingChat() {
         const handleMouseMove = (e: MouseEvent) => {
             if (!robotRef.current) return;
             const rect = robotRef.current.getBoundingClientRect();
-            
+
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-            
+
             const deltaX = e.clientX - centerX;
             const deltaY = e.clientY - centerY;
-            
-            const maxMove = 12; 
-            
+
+            const maxMove = 12;
+
             const angle = Math.atan2(deltaY, deltaX);
             const dist = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 800);
             const ratio = dist / 800;
             const easedRatio = 1 - Math.pow(1 - ratio, 3);
-            
+
             const moveX = Math.cos(angle) * maxMove * easedRatio;
             const moveY = Math.sin(angle) * maxMove * easedRatio;
-            
+
             setEyePosition({ x: moveX, y: moveY });
         };
 
@@ -59,16 +59,16 @@ export default function FloatingChat() {
     const handleSend = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!input.trim() || isLoading) return;
-        
+
         const userMsg = input.trim();
         const newMessages: ChatMessage[] = [...messages, { role: 'user', content: userMsg }];
-        
+
         setMessages(newMessages);
         setInput('');
         setIsLoading(true);
-        
+
         const response = await sendChatMessage(newMessages);
-        
+
         setMessages([...newMessages, { role: 'assistant', content: response }]);
         setIsLoading(false);
     };
@@ -76,7 +76,7 @@ export default function FloatingChat() {
     const eyeBlinkAnimation = {
         scaleY: [1, 1, 0.1, 1, 1],
     };
-    
+
     const eyeBlinkTransition: any = {
         duration: 4,
         repeat: Infinity,
@@ -147,7 +147,7 @@ export default function FloatingChat() {
                                     </div>
                                     <div className="max-w-[80%] rounded-2xl px-4 py-2.5 text-sm shadow-sm bg-background border border-border/50 text-foreground rounded-bl-sm flex items-center gap-2">
                                         <Loader2 size={14} className="animate-spin text-primary" />
-                                        <span className="text-muted-foreground text-xs">Mochi sedang mengetik...</span>
+                                        <span className="text-muted-foreground text-xs">Mochika sedang mengetik...</span>
                                     </div>
                                 </div>
                             )}
@@ -197,21 +197,21 @@ export default function FloatingChat() {
                     )}
                 </AnimatePresence>
                 {/* Floating Shadow - moves opposite to the bounce */}
-                <motion.div 
+                <motion.div
                     animate={
-                        isJumping 
-                        ? { 
-                            scale: [1, 1.2, 0.2, 0.2, 1.3, 1], 
-                            opacity: [0.3, 0.4, 0.05, 0.05, 0.4, 0.3] 
-                          }
-                        : { scale: isOpen ? 1 : [1, 0.8, 1], opacity: isOpen ? 0.2 : [0.3, 0.1, 0.3] }
+                        isJumping
+                            ? {
+                                scale: [1, 1.2, 0.2, 0.2, 1.3, 1],
+                                opacity: [0.3, 0.4, 0.05, 0.05, 0.4, 0.3]
+                            }
+                            : { scale: isOpen ? 1 : [1, 0.8, 1], opacity: isOpen ? 0.2 : [0.3, 0.1, 0.3] }
                     }
                     transition={
                         isJumping
-                        ? { duration: 1.2, times: [0, 0.15, 0.4, 0.7, 0.9, 1], ease: ["easeOut", "easeOut", "easeInOut", "easeIn", "easeOut"] }
-                        : { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                            ? { duration: 1.2, times: [0, 0.15, 0.4, 0.7, 0.9, 1], ease: ["easeOut", "easeOut", "easeInOut", "easeIn", "easeOut"] }
+                            : { duration: 3, repeat: Infinity, ease: "easeInOut" }
                     }
-                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-10 h-2 bg-black rounded-full blur-[4px]" 
+                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-10 h-2 bg-black rounded-full blur-[4px]"
                 />
 
                 {/* Bobbing Wrapper */}
@@ -223,7 +223,7 @@ export default function FloatingChat() {
                                 scaleX: [1, 1.3, 0.8, 1, 1.4, 1],
                                 scaleY: [1, 0.7, 1.3, 1, 0.6, 1],
                                 rotate: [0, 0, 180, 540, 720, 720],
-                              }
+                            }
                             : { y: isOpen ? 0 : [0, -6, 0] }
                     }
                     transition={
@@ -235,21 +235,21 @@ export default function FloatingChat() {
                 >
                     {/* Antenna */}
                     {!isOpen && (
-                        <motion.div 
+                        <motion.div
                             className="absolute -top-3 left-1/2 -translate-x-1/2 w-1 h-4 bg-zinc-400 rounded-t-full origin-bottom z-0"
                             animate={
-                                isJumping 
-                                ? { rotate: [0, -45, 45, -45, 45, -45, 45, -45, 45, 0] }
-                                : isHovered
-                                ? { rotate: [0, -15, 15, -10, 10, 0] }
-                                : { rotate: eyePosition.x * 3 }
+                                isJumping
+                                    ? { rotate: [0, -45, 45, -45, 45, -45, 45, -45, 45, 0] }
+                                    : isHovered
+                                        ? { rotate: [0, -15, 15, -10, 10, 0] }
+                                        : { rotate: eyePosition.x * 3 }
                             }
                             transition={
-                                isJumping 
-                                ? { duration: 1.2, ease: "linear" } 
-                                : isHovered
-                                ? { repeat: Infinity, duration: 1.5, ease: "easeInOut" }
-                                : { type: "spring", stiffness: 300, damping: 20 }
+                                isJumping
+                                    ? { duration: 1.2, ease: "linear" }
+                                    : isHovered
+                                        ? { repeat: Infinity, duration: 1.5, ease: "easeInOut" }
+                                        : { type: "spring", stiffness: 300, damping: 20 }
                             }
                         >
                             <div className="absolute -top-1.5 -left-[4px] w-3 h-3 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
@@ -258,7 +258,7 @@ export default function FloatingChat() {
 
                     {/* Head Body */}
                     <motion.div
-                        animate={{ 
+                        animate={{
                             rotateX: isOpen ? 0 : eyePosition.y * -2.5,
                             rotateY: isOpen ? 0 : eyePosition.x * 2.5,
                         }}
@@ -270,24 +270,24 @@ export default function FloatingChat() {
                             <X size={28} className="text-background" />
                         ) : (
                             /* Face / Visor */
-                            <motion.div 
+                            <motion.div
                                 className="w-[44px] h-[26px] bg-zinc-900 rounded-[12px] flex items-center justify-center relative shadow-[inset_0_2px_8px_rgba(0,0,0,0.9)] overflow-hidden"
-                                animate={{ 
-                                    x: eyePosition.x * 0.8, 
+                                animate={{
+                                    x: eyePosition.x * 0.8,
                                     y: eyePosition.y * 0.8,
                                 }}
                                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
                             >
                                 {/* Visor Glass Reflection */}
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[50%] bg-gradient-to-b from-white/20 to-transparent rounded-b-full blur-[1px]" />
-                                
+
                                 {/* Cheeks */}
-                                <motion.div 
+                                <motion.div
                                     className="absolute top-[18px] left-[6px] w-[8px] h-[4px] bg-pink-500 rounded-full blur-[1px]"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: isHovered || isJumping ? 0.8 : 0 }}
                                 />
-                                <motion.div 
+                                <motion.div
                                     className="absolute top-[18px] right-[6px] w-[8px] h-[4px] bg-pink-500 rounded-full blur-[1px]"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: isHovered || isJumping ? 0.8 : 0 }}
@@ -296,44 +296,44 @@ export default function FloatingChat() {
                                 {/* Eyes Container */}
                                 <div className="flex gap-2.5 relative z-10">
                                     {/* Left Eye */}
-                                    <motion.div 
+                                    <motion.div
                                         className="w-[6px] h-[10px] bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.9)] relative overflow-hidden"
                                         animate={
-                                            isJumping 
-                                            ? { scaleY: 0.15, scaleX: 2 } 
-                                            : isHovered
-                                            ? { scaleY: 1.1, scaleX: 1.1 }
-                                            : eyeBlinkAnimation
+                                            isJumping
+                                                ? { scaleY: 0.15, scaleX: 2 }
+                                                : isHovered
+                                                    ? { scaleY: 1.1, scaleX: 1.1 }
+                                                    : eyeBlinkAnimation
                                         }
                                         transition={isJumping || isHovered ? { duration: 0.2 } : (eyeBlinkTransition as any)}
                                     >
-                                        <motion.div 
+                                        <motion.div
                                             className="w-[3px] h-[3px] bg-white rounded-full absolute top-[1px] right-[1px]"
                                             animate={
                                                 isJumping ? { opacity: 0 }
-                                                : isHovered ? { scale: [1, 1.5, 1], opacity: 1, transition: { repeat: Infinity, duration: 1 } }
-                                                : { opacity: 0.9 }
+                                                    : isHovered ? { scale: [1, 1.5, 1], opacity: 1, transition: { repeat: Infinity, duration: 1 } }
+                                                        : { opacity: 0.9 }
                                             }
                                         />
                                     </motion.div>
                                     {/* Right Eye */}
-                                    <motion.div 
+                                    <motion.div
                                         className="w-[6px] h-[10px] bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.9)] relative overflow-hidden"
                                         animate={
-                                            isJumping 
-                                            ? { scaleY: 0.15, scaleX: 2 } 
-                                            : isHovered
-                                            ? { scaleY: 1.1, scaleX: 1.1 }
-                                            : eyeBlinkAnimation
+                                            isJumping
+                                                ? { scaleY: 0.15, scaleX: 2 }
+                                                : isHovered
+                                                    ? { scaleY: 1.1, scaleX: 1.1 }
+                                                    : eyeBlinkAnimation
                                         }
                                         transition={isJumping || isHovered ? { duration: 0.2 } : (eyeBlinkTransition as any)}
                                     >
-                                        <motion.div 
+                                        <motion.div
                                             className="w-[3px] h-[3px] bg-white rounded-full absolute top-[1px] right-[1px]"
                                             animate={
                                                 isJumping ? { opacity: 0 }
-                                                : isHovered ? { scale: [1, 1.5, 1], opacity: 1, transition: { repeat: Infinity, duration: 1 } }
-                                                : { opacity: 0.9 }
+                                                    : isHovered ? { scale: [1, 1.5, 1], opacity: 1, transition: { repeat: Infinity, duration: 1 } }
+                                                        : { opacity: 0.9 }
                                             }
                                         />
                                     </motion.div>
@@ -341,7 +341,7 @@ export default function FloatingChat() {
                             </motion.div>
                         )}
                     </motion.div>
-                    
+
                     {/* Notification dot */}
                     {!isOpen && (
                         <span className="absolute -top-1 -right-1 flex h-4 w-4 z-20">
