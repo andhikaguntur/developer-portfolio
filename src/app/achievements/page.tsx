@@ -13,11 +13,8 @@ export default function AchievementsPage() {
                     transition={{ duration: 0.8 }}
                     className="mb-16"
                 >
-                    <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">
-                        Detail &mdash; 03
-                    </span>
-                    <h1 className="text-5xl md:text-8xl font-bold tracking-tighter">
-                        All <span className="text-muted-foreground">Milestones</span>
+                    <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">
+                        All <span className="text-muted-foreground italic">Milestones</span>
                     </h1>
                 </motion.div>
 

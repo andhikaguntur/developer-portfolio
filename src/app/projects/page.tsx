@@ -13,11 +13,8 @@ export default function ProjectsPage() {
                     transition={{ duration: 0.8 }}
                     className="mb-16"
                 >
-                    <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">
-                        Archive &mdash; 02
-                    </span>
-                    <h1 className="text-5xl md:text-8xl font-bold tracking-tighter">
-                        Project <span className="text-muted-foreground">Gallery</span>
+                    <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">
+                        Project <span className="text-muted-foreground italic">Gallery</span>
                     </h1>
                 </motion.div>
 

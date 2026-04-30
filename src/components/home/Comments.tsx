@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Reply, Heart, Send, LogOut, MoreHorizontal } from 'lucide-react';
 import Image from 'next/image';
+import { supabase } from '@/lib/supabaseClient';
 
 type CommentType = {
     id: string;
@@ -13,120 +14,220 @@ type CommentType = {
     timestamp: string;
     likes: number;
     isLiked?: boolean;
+    parent_id?: string | null;
     replies?: CommentType[];
+    created_at?: string;
 };
-
-const DUMMY_COMMENTS: CommentType[] = [
-    {
-        id: '1',
-        author: 'Sarah Jenkins',
-        avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Sarah&backgroundColor=b6e3f4',
-        content: 'This portfolio is incredibly smooth! The animations are top notch. Did you use Framer Motion for everything?',
-        timestamp: '2 hours ago',
-        likes: 12,
-        replies: [
-            {
-                id: '1-1',
-                author: 'Andhika Guntur',
-                avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Andhika&backgroundColor=c0aede',
-                content: 'Thank you Sarah! Yes, mostly Framer Motion mixed with some pure CSS transitions for performance.',
-                timestamp: '1 hour ago',
-                likes: 5,
-            }
-        ]
-    },
-    {
-        id: '2',
-        author: 'Alex Chen',
-        avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Alex&backgroundColor=ffdfbf',
-        content: 'Love the minimalist dark mode aesthetic. Super clean code structure too.',
-        timestamp: '5 hours ago',
-        likes: 8,
-    }
-];
 
 export default function Comments() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [comments, setComments] = useState<CommentType[]>(DUMMY_COMMENTS);
+    const [comments, setComments] = useState<CommentType[]>([]);
     const [newComment, setNewComment] = useState('');
     const [replyingTo, setReplyingTo] = useState<string | null>(null);
     const [replyText, setReplyText] = useState('');
-
-    const currentUser = {
+    const [currentUser, setCurrentUser] = useState({
         name: 'Guest User',
         avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Guest&backgroundColor=ffd5dc'
+    });
+
+    useEffect(() => {
+        // Check active session
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) {
+                setIsLoggedIn(true);
+                setCurrentUser({
+                    name: session.user.user_metadata.full_name || 'User',
+                    avatar: session.user.user_metadata.avatar_url || session.user.user_metadata.picture || `https://api.dicebear.com/7.x/notionists/svg?seed=${session.user.id}`
+                });
+            }
+        });
+
+        // Listen for auth changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            if (session) {
+                setIsLoggedIn(true);
+                setCurrentUser({
+                    name: session.user.user_metadata.full_name || 'User',
+                    avatar: session.user.user_metadata.avatar_url || session.user.user_metadata.picture || `https://api.dicebear.com/7.x/notionists/svg?seed=${session.user.id}`
+                });
+            } else {
+                setIsLoggedIn(false);
+                setCurrentUser({
+                    name: 'Guest User',
+                    avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Guest&backgroundColor=ffd5dc'
+                });
+            }
+        });
+
+        fetchComments();
+
+        return () => subscription.unsubscribe();
+    }, []);
+
+    const fetchComments = async () => {
+        const { data, error } = await supabase
+            .from('comments')
+            .select('*')
+            .order('created_at', { ascending: true });
+        
+        if (error) {
+            console.error('Error fetching comments:', error);
+            return;
+        }
+
+        if (data) {
+            // Organize comments into parent/replies structure
+            const mainComments: CommentType[] = [];
+            const replies: CommentType[] = [];
+
+            data.forEach(comment => {
+                const formattedComment: CommentType = {
+                    id: comment.id,
+                    author: comment.author,
+                    avatar: comment.avatar,
+                    content: comment.content,
+                    timestamp: new Date(comment.created_at).toLocaleString(),
+                    likes: comment.likes || 0,
+                    parent_id: comment.parent_id,
+                    replies: []
+                };
+
+                if (comment.parent_id) {
+                    replies.push(formattedComment);
+                } else {
+                    mainComments.push(formattedComment);
+                }
+            });
+
+            // Attach replies to parents
+            mainComments.forEach(parent => {
+                parent.replies = replies.filter(reply => reply.parent_id === parent.id);
+            });
+
+            // Sort main comments descending
+            mainComments.reverse();
+
+            setComments(mainComments);
+        }
     };
 
-    const handleLogin = () => {
-        // Dummy Google Login
-        setIsLoggedIn(true);
+    const handleLogin = async () => {
+        await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: window.location.origin,
+            }
+        });
     };
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
         setIsLoggedIn(false);
         setReplyingTo(null);
     };
 
-    const handlePostComment = (e: React.FormEvent) => {
+    const handlePostComment = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!newComment.trim()) return;
+        if (!newComment.trim() || !isLoggedIn) return;
 
-        const comment: CommentType = {
-            id: Date.now().toString(),
-            author: currentUser.name,
-            avatar: currentUser.avatar,
-            content: newComment,
-            timestamp: 'Just now',
-            likes: 0,
-        };
+        const { data, error } = await supabase
+            .from('comments')
+            .insert([
+                {
+                    author: currentUser.name,
+                    avatar: currentUser.avatar,
+                    content: newComment,
+                    likes: 0
+                }
+            ])
+            .select();
 
-        setComments([comment, ...comments]);
-        setNewComment('');
+        if (error) {
+            console.error('Error posting comment:', error);
+            return;
+        }
+
+        if (data) {
+            setNewComment('');
+            fetchComments();
+        }
     };
 
-    const handlePostReply = (e: React.FormEvent, parentId: string) => {
+    const handlePostReply = async (e: React.FormEvent, parentId: string) => {
         e.preventDefault();
-        if (!replyText.trim()) return;
+        if (!replyText.trim() || !isLoggedIn) return;
 
-        setComments(comments.map(c => {
-            if (c.id === parentId) {
-                const newReply: CommentType = {
-                    id: Date.now().toString(),
+        const { data, error } = await supabase
+            .from('comments')
+            .insert([
+                {
                     author: currentUser.name,
                     avatar: currentUser.avatar,
                     content: replyText,
-                    timestamp: 'Just now',
                     likes: 0,
-                };
-                return { ...c, replies: [...(c.replies || []), newReply] };
-            }
-            return c;
-        }));
+                    parent_id: parentId
+                }
+            ])
+            .select();
         
-        setReplyText('');
-        setReplyingTo(null);
+        if (error) {
+            console.error('Error posting reply:', error);
+            return;
+        }
+
+        if (data) {
+            setReplyText('');
+            setReplyingTo(null);
+            fetchComments();
+        }
     };
 
-    const toggleLike = (commentId: string, isReply = false, parentId?: string) => {
-        if (!isLoggedIn) return; // Must be logged in to like (optional dummy rule)
+    const toggleLike = async (commentId: string, isReply = false, parentId?: string) => {
+        if (!isLoggedIn) return;
 
+        // Find current likes
+        let targetComment: CommentType | undefined;
+        if (!isReply) {
+            targetComment = comments.find(c => c.id === commentId);
+        } else {
+            const parent = comments.find(c => c.id === parentId);
+            targetComment = parent?.replies?.find(r => r.id === commentId);
+        }
+
+        if (!targetComment) return;
+
+        const newIsLiked = !targetComment.isLiked;
+        const newLikes = newIsLiked ? targetComment.likes + 1 : Math.max(0, targetComment.likes - 1);
+
+        // Optimistic update
         setComments(comments.map(c => {
             if (!isReply && c.id === commentId) {
-                return { ...c, isLiked: !c.isLiked, likes: c.isLiked ? c.likes - 1 : c.likes + 1 };
+                return { ...c, isLiked: newIsLiked, likes: newLikes };
             } else if (isReply && c.id === parentId) {
                 return {
                     ...c,
                     replies: c.replies?.map(r => 
-                        r.id === commentId ? { ...r, isLiked: !r.isLiked, likes: r.isLiked ? r.likes - 1 : r.likes + 1 } : r
+                        r.id === commentId ? { ...r, isLiked: newIsLiked, likes: newLikes } : r
                     )
                 };
             }
             return c;
         }));
+
+        // Update DB
+        const { error } = await supabase
+            .from('comments')
+            .update({ likes: newLikes })
+            .eq('id', commentId);
+
+        if (error) {
+            console.error('Error updating likes:', error);
+        }
     };
 
-    const CommentItem = ({ comment, isReply = false, parentId }: { comment: CommentType, isReply?: boolean, parentId?: string }) => (
+    const renderCommentItem = (comment: CommentType, isReply = false, parentId?: string) => (
         <motion.div 
+            key={comment.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className={`flex gap-4 ${isReply ? 'ml-12 mt-4' : 'mt-8'}`}
@@ -204,7 +305,7 @@ export default function Comments() {
 
                 {/* Nested Replies */}
                 {comment.replies && comment.replies.map(reply => (
-                    <CommentItem key={reply.id} comment={reply} isReply={true} parentId={comment.id} />
+                    renderCommentItem(reply, true, comment.id)
                 ))}
             </div>
         </motion.div>
@@ -215,11 +316,8 @@ export default function Comments() {
             <div className="max-w-4xl mx-auto">
                 <div className="flex items-end justify-between mb-12">
                     <div>
-                        <span className="text-muted-foreground text-xs uppercase tracking-widest block font-bold mb-3">
-                            Section &mdash; 04
-                        </span>
-                        <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase drop-shadow-sm leading-none text-foreground flex items-center gap-3">
-                            Community <span className="text-primary italic">Chat</span>
+                        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter flex items-center gap-3">
+                            Community <span className="text-muted-foreground italic">Chat</span>
                         </h2>
                     </div>
                     {isLoggedIn && (
@@ -295,7 +393,7 @@ export default function Comments() {
                         
                         <AnimatePresence>
                             {comments.map((comment) => (
-                                <CommentItem key={comment.id} comment={comment} />
+                                renderCommentItem(comment)
                             ))}
                         </AnimatePresence>
                     </div>

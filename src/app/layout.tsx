@@ -19,7 +19,6 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/layout/Navbar";
-import CursorEffects from "@/components/ui/CursorEffects";
 import FloatingChat from "@/components/layout/FloatingChat";
 
 export default function RootLayout({
@@ -33,7 +32,6 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased font-sans bg-muted/30 text-foreground transition-colors duration-300`}
       >
         <ThemeProvider>
-          <CursorEffects />
           <FloatingChat />
           <div className="flex flex-col min-h-screen">
             {/* Navigation */}
@@ -45,7 +43,7 @@ export default function RootLayout({
               <div className="w-full max-w-[1400px] min-h-[calc(100vh-10rem)] bg-background border border-border/50 shadow-2xl shadow-foreground/5 rounded-3xl overflow-hidden relative group">
                 {/* Subtle Paper Texture Overlay (optional via CSS) */}
                 <div className="absolute inset-0 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-[0.03] dark:opacity-[0.05]" />
-                
+
                 {/* Content */}
                 <div className="relative z-10 p-6 md:p-10 lg:p-16">
                   {children}

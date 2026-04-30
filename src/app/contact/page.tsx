@@ -35,11 +35,8 @@ export default function ContactPage() {
                     transition={{ duration: 0.8 }}
                     className="w-full text-center mb-16"
                 >
-                    <span className="text-muted-foreground text-xs uppercase tracking-widest mb-4 block font-semibold">
-                        Detail &mdash; 03
-                    </span>
-                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase drop-shadow-sm leading-none">
-                        Let's <span className="text-primary italic">Connect</span>
+                    <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-16">
+                        Let's <span className="text-muted-foreground italic">Connect</span>
                     </h1>
                 </motion.div>
 

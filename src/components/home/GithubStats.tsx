@@ -14,11 +14,8 @@ export default function GithubStats() {
                     className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6"
                 >
                     <div>
-                        <span className="text-muted-foreground text-xs uppercase tracking-widest block font-bold mb-3">
-                            Section &mdash; 03
-                        </span>
-                        <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase drop-shadow-sm leading-none text-foreground">
-                            Open <span className="text-primary italic">Source</span>
+                        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
+                            Open <span className="text-muted-foreground italic">Source</span>
                         </h2>
                     </div>
                     <a

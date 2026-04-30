@@ -57,10 +57,7 @@ export default function Achievements({ limit }: AchievementsProps) {
                         viewport={{ once: true }}
                         className="mb-16 text-center"
                     >
-                        <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">
-                            Highlights &mdash; 03
-                        </span>
-                        <h2 className="text-4xl md:text-6xl font-bold tracking-tighter">
+                        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
                             Featured <span className="text-muted-foreground italic">Milestones.</span>
                         </h2>
                         <div className="mt-6 h-px bg-gradient-to-r from-transparent via-border to-transparent w-full" />

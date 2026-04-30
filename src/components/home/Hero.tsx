@@ -112,11 +112,7 @@ export default function Hero() {
                     transition={{ duration: 0.6 }}
                     className="w-full md:w-[320px] shrink-0 flex flex-col gap-6"
                 >
-                    <div className="mb-2 hidden md:block">
-                        <span className="text-muted-foreground text-xs uppercase tracking-widest block font-semibold">
-                            Profile &mdash; 00
-                        </span>
-                    </div>
+
 
                     {/* Profile Avatar */}
                     <motion.div
@@ -194,11 +190,8 @@ export default function Hero() {
                     {/* Small Summary Paragraph */}
                     <div className="space-y-6">
                         <div className="mb-6">
-                            <span className="text-muted-foreground text-xs uppercase tracking-widest block font-bold mb-3">
-                                Section &mdash; 01
-                            </span>
-                            <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase drop-shadow-sm leading-none text-foreground">
-                                Professional <span className="text-primary italic">Overview</span>
+                            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
+                                Professional <span className="text-muted-foreground italic">Overview</span>
                             </h2>
                         </div>
                         <motion.div
@@ -215,11 +208,8 @@ export default function Hero() {
                     <div className="space-y-6">
                         <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
                             <div>
-                                <span className="text-muted-foreground text-xs uppercase tracking-widest block font-bold mb-3">
-                                    Section &mdash; 02
-                                </span>
-                                <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase drop-shadow-sm leading-none text-foreground">
-                                    Technical <span className="text-primary italic">Skills</span>
+                                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
+                                    Technical <span className="text-muted-foreground italic">Skills</span>
                                 </h2>
                             </div>
                             <span className="text-[10px] uppercase tracking-widest text-muted-foreground hover:text-primary cursor-pointer transition-colors font-bold pb-1">Customize Stack</span>

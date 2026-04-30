@@ -2,14 +2,16 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, Bot, Sparkles } from 'lucide-react';
+import { X, Send, Bot, Sparkles, Loader2 } from 'lucide-react';
+import { sendChatMessage, ChatMessage } from '@/app/actions/chat';
 
 export default function FloatingChat() {
     const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState<{role: 'user'|'ai', text: string}[]>([
-        { role: 'ai', text: "Hello! I'm Andhika's AI assistant. I'm currently a mock interface, but soon I'll be able to answer all your questions!" }
+    const [messages, setMessages] = useState<ChatMessage[]>([
+        { role: 'assistant', content: "Halo! Aku Mochi, asisten AI Andhika. Ada yang bisa aku bantu seputar portofolio ini?" }
     ]);
     const [input, setInput] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const robotRef = useRef<HTMLButtonElement>(null);
     const [eyePosition, setEyePosition] = useState({ x: 0, y: 0 });
@@ -54,17 +56,21 @@ export default function FloatingChat() {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
-    const handleSend = (e: React.FormEvent) => {
+    const handleSend = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!input.trim()) return;
+        if (!input.trim() || isLoading) return;
         
-        setMessages(prev => [...prev, { role: 'user', text: input }]);
+        const userMsg = input.trim();
+        const newMessages: ChatMessage[] = [...messages, { role: 'user', content: userMsg }];
+        
+        setMessages(newMessages);
         setInput('');
+        setIsLoading(true);
         
-        // Mock AI response
-        setTimeout(() => {
-            setMessages(prev => [...prev, { role: 'ai', text: "I'm still a mock UI right now. Please integrate your AI logic here!" }]);
-        }, 1000);
+        const response = await sendChatMessage(newMessages);
+        
+        setMessages([...newMessages, { role: 'assistant', content: response }]);
+        setIsLoading(false);
     };
 
     const eyeBlinkAnimation = {
@@ -124,16 +130,27 @@ export default function FloatingChat() {
                         <div className="h-[380px] overflow-y-auto p-4 flex flex-col gap-4 bg-muted/5 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
                             {messages.map((msg, idx) => (
                                 <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                                    {msg.role === 'ai' && (
+                                    {msg.role === 'assistant' && (
                                         <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 mr-2 mt-auto mb-1">
                                             <Bot size={12} />
                                         </div>
                                     )}
                                     <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm shadow-sm ${msg.role === 'user' ? 'bg-primary text-primary-foreground rounded-br-sm' : 'bg-background border border-border/50 text-foreground rounded-bl-sm'}`}>
-                                        {msg.text}
+                                        {msg.content}
                                     </div>
                                 </div>
                             ))}
+                            {isLoading && (
+                                <div className="flex justify-start">
+                                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 mr-2 mt-auto mb-1">
+                                        <Bot size={12} />
+                                    </div>
+                                    <div className="max-w-[80%] rounded-2xl px-4 py-2.5 text-sm shadow-sm bg-background border border-border/50 text-foreground rounded-bl-sm flex items-center gap-2">
+                                        <Loader2 size={14} className="animate-spin text-primary" />
+                                        <span className="text-muted-foreground text-xs">Mochi sedang mengetik...</span>
+                                    </div>
+                                </div>
+                            )}
                             <div ref={messagesEndRef} />
                         </div>
 
@@ -146,7 +163,7 @@ export default function FloatingChat() {
                                 placeholder="Ask AI anything..."
                                 className="flex-1 bg-muted/20 border border-border/50 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:border-primary transition-colors"
                             />
-                            <button type="submit" disabled={!input.trim()} className="w-10 h-10 bg-foreground text-background disabled:opacity-50 disabled:cursor-not-allowed rounded-full flex items-center justify-center hover:bg-foreground/90 transition-colors shrink-0">
+                            <button type="submit" disabled={!input.trim() || isLoading} className="w-10 h-10 bg-foreground text-background disabled:opacity-50 disabled:cursor-not-allowed rounded-full flex items-center justify-center hover:bg-foreground/90 transition-colors shrink-0">
                                 <Send size={16} className="ml-1" />
                             </button>
                         </form>
