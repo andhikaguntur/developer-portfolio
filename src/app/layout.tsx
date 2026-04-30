@@ -23,7 +23,7 @@ import FloatingChat from "@/components/layout/FloatingChat";
 import LoadingBar from "@/components/layout/LoadingBar";
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
   children,
