@@ -19,7 +19,9 @@ import {
     Mail,
     Github,
     Instagram,
-    Linkedin
+    Linkedin,
+    Bot,
+    Sparkles
 } from 'lucide-react';
 
 const SOCIALS = [
@@ -29,64 +31,48 @@ const SOCIALS = [
 ];
 
 import avatarImage from '../../assets/ppporto.jpg';
+import { useLoading } from '@/context/LoadingContext';
 
-function TypewriterEffect({ text }: { text: string }) {
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
-
-    if (!mounted) return <span className="inline-block">{text}</span>;
-
-    return <ActualTypewriter text={text} />;
-}
-
-function ActualTypewriter({ text }: { text: string }) {
+const TypewriterEffect = ({ text }: { text: string }) => {
     const [displayedText, setDisplayedText] = useState("");
     const [index, setIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
-        let timeout: NodeJS.Timeout;
-
-        if (!isDeleting && index < text.length) {
-            timeout = setTimeout(() => {
+        const timeout = setTimeout(() => {
+            if (!isDeleting && index < text.length) {
                 setDisplayedText(prev => prev + text[index]);
-                setIndex(index + 1);
-            }, 150);
-        } else if (isDeleting && index > 0) {
-            timeout = setTimeout(() => {
+                setIndex(prev => prev + 1);
+            } else if (isDeleting && index > 0) {
                 setDisplayedText(prev => prev.slice(0, -1));
-                setIndex(index - 1);
-            }, 100);
-        } else if (index === text.length) {
-            timeout = setTimeout(() => setIsDeleting(true), 4000);
-        } else if (index === 0 && isDeleting) {
-            timeout = setTimeout(() => setIsDeleting(false), 500);
-        }
-
+                setIndex(prev => prev - 1);
+            } else if (index === text.length) {
+                setTimeout(() => setIsDeleting(true), 3000);
+            } else if (index === 0 && isDeleting) {
+                setIsDeleting(false);
+            }
+        }, isDeleting ? 70 : 150);
         return () => clearTimeout(timeout);
     }, [index, isDeleting, text]);
 
     return (
-        <span className="inline-block">
+        <span className="inline-block min-h-[1.2em]">
             {displayedText}
             <motion.span
                 animate={{ opacity: [1, 0] }}
-                transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
-                className="inline-block w-[4px] h-[0.9em] bg-primary align-middle ml-1"
+                transition={{ repeat: Infinity, duration: 0.8 }}
+                className="inline-block w-[3px] h-[0.9em] bg-primary align-middle ml-1"
             />
         </span>
     );
-}
+};
 
-// Elegant Cycling Text
 function CyclingButton() {
     const phrases = ["Let's Connect", "Build Magic", "Crafting Experiences", "Shape The Future"];
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setIndex((prev) => (prev + 1) % phrases.length);
-        }, 3500);
+        const interval = setInterval(() => setIndex(i => (i + 1) % phrases.length), 3500);
         return () => clearInterval(interval);
     }, [phrases.length]);
 
@@ -108,7 +94,63 @@ function CyclingButton() {
     );
 }
 
+
+function MiniMochika() {
+    return (
+        <motion.div
+            initial={{ y: 80, x: -20, rotate: 20, scale: 0.8 }}
+            animate={{ y: -20, x: 20, rotate: 5, scale: 1 }}
+            exit={{ y: 80, x: -20, rotate: 20, scale: 0.8 }}
+            transition={{ 
+                type: "spring", 
+                stiffness: 300, 
+                damping: 15,
+                mass: 0.8
+            }}
+            className="absolute top-0 right-0 z-0 w-24 h-24 pointer-events-none"
+        >
+            {/* Speech Bubble */}
+            <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.5 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 0.4 }}
+                className="absolute -top-12 left-0 bg-foreground text-background text-[10px] font-bold px-3 py-1.5 rounded-full whitespace-nowrap shadow-xl border border-border z-30"
+            >
+                Peek-a-boo! ✨
+                <div className="absolute -bottom-1 left-4 w-2 h-2 bg-foreground rotate-45" />
+            </motion.div>
+
+            {/* Mochika Body - Identical to FloatingChat version */}
+            <div className="w-20 h-20 bg-gradient-to-b from-white via-zinc-100 to-zinc-300 rounded-2xl border border-white/60 shadow-[0_10px_20px_rgba(0,0,0,0.2),inset_0_-8px_16px_rgba(0,0,0,0.1),inset_0_8px_16px_rgba(255,255,255,0.9)] relative flex items-center justify-center overflow-visible">
+                
+                {/* Antenna */}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-1 h-5 bg-zinc-400 rounded-full origin-bottom">
+                    <div className="absolute -top-1.5 -left-[3px] w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
+                </div>
+
+                {/* Face / Visor */}
+                <div className="w-[50px] h-[30px] bg-zinc-900 rounded-[12px] flex items-center justify-center relative shadow-[inset_0_2px_8px_rgba(0,0,0,0.9)] overflow-hidden">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[50%] bg-gradient-to-b from-white/20 to-transparent rounded-b-full blur-[1px]" />
+                    
+                    {/* Glowing Eyes */}
+                    <div className="flex gap-2.5">
+                        <div className="w-[7px] h-[11px] bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.9)] animate-pulse" />
+                        <div className="w-[7px] h-[11px] bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.9)] animate-pulse" />
+                    </div>
+                </div>
+
+                {/* Blushing cheeks */}
+                <div className="absolute bottom-4 left-4 w-2 h-1 bg-pink-400/40 rounded-full blur-[1px]" />
+                <div className="absolute bottom-4 right-4 w-2 h-1 bg-pink-400/40 rounded-full blur-[1px]" />
+            </div>
+        </motion.div>
+    );
+}
+
 export default function Hero() {
+    const [isHoveringAvatar, setIsHoveringAvatar] = useState(false);
+    const { isDone } = useLoading();
+
     return (
         <section className="w-full min-h-[80vh] flex justify-center py-12 md:py-20">
             <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-12 md:gap-20">
@@ -116,26 +158,33 @@ export default function Hero() {
                 {/* Left Sidebar (Profile Info) */}
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
+                    animate={isDone ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.1 }}
                     className="w-full md:w-[320px] shrink-0 flex flex-col gap-6"
                 >
 
 
                     {/* Profile Avatar */}
-                    <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        className="relative w-48 md:w-full max-w-[260px] mx-auto md:mx-0 aspect-square rounded-full overflow-hidden border border-border/40 shadow-sm bg-muted/10"
-                    >
-                        <Image
-                            src={avatarImage}
-                            alt="Andhika Guntur Avatar"
-                            fill
-                            sizes="(max-width: 768px) 192px, 260px"
-                            className="object-cover transition-all duration-500 filter hover:grayscale-0 grayscale"
-                        />
-                    </motion.div>
+                    <div className="relative w-48 md:w-full max-w-[260px] mx-auto md:mx-0">
+                        <motion.div
+                            onMouseEnter={() => setIsHoveringAvatar(true)}
+                            onMouseLeave={() => setIsHoveringAvatar(false)}
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                            className="relative w-full aspect-square rounded-full overflow-hidden border border-border/40 shadow-sm bg-muted/10 group z-10"
+                        >
+                            <Image
+                                src={avatarImage}
+                                alt="Andhika Guntur Avatar"
+                                fill
+                                sizes="(max-width: 768px) 192px, 260px"
+                                className="object-cover transition-all duration-500 filter hover:grayscale-0 grayscale"
+                            />
+                        </motion.div>
+                        <AnimatePresence>
+                            {isHoveringAvatar && <MiniMochika />}
+                        </AnimatePresence>
+                    </div>
 
                     <div className="flex flex-col gap-1 text-center md:text-left min-h-[4rem]">
                         <h1 className="text-3xl lg:text-4xl font-black font-heading tracking-tighter text-foreground whitespace-nowrap">
@@ -172,7 +221,7 @@ export default function Hero() {
                         </div>
                         <div className="flex items-center gap-3 group">
                             <Mail size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                            <a href="mailto:hello@andhikaguntur.dev" className="text-foreground font-medium hover:text-primary transition-colors">hello@andhikaguntur.dev</a>
+                            <a href="mailto:andhikaguntur77.ag@gmail.com" className="text-foreground font-medium hover:text-primary transition-colors">andhikaguntur77.ag@gmail.com</a>
                         </div>
                     </div>
                 </motion.div>
@@ -180,8 +229,8 @@ export default function Hero() {
                 {/* Right Area (Summary & Skills) */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                    animate={isDone ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.3 }}
                     className="flex-1 flex flex-col gap-16 mt-12 md:mt-0"
                 >
                     {/* Small Summary Paragraph */}

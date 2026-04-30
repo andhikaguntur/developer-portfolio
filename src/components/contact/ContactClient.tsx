@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Send, MessageSquare, Github, Instagram, Linkedin, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
+import { sendEmail } from '@/app/actions/contact';
 
 const SOCIALS = [
     { name: 'GitHub', href: 'https://github.com/andhikaguntur', icon: Github },
@@ -32,7 +33,7 @@ export function ContactInfo() {
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground uppercase tracking-widest font-semibold mb-1">Email</p>
-                        <a href="mailto:hello@andhikaguntur.dev" className="text-foreground hover:text-primary transition-colors font-medium">hello@andhikaguntur.dev</a>
+                        <a href="mailto:andhikaguntur77.ag@gmail.com" className="text-foreground hover:text-primary transition-colors font-medium">andhikaguntur77.ag@gmail.com</a>
                     </div>
                 </div>
 
@@ -82,16 +83,33 @@ export function ContactInfo() {
 export function ContactForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Simulate network request
-        setTimeout(() => {
+        setError(null);
+
+        try {
+            const formData = new FormData(e.currentTarget);
+            const result = await sendEmail(formData);
+
+            if (result && result.success) {
+                setError(null);
+                setSubmitted(true);
+                e.currentTarget.reset();
+                setTimeout(() => setSubmitted(false), 5000);
+            } else if (result && result.error) {
+                setError(result.error);
+            } else {
+                setError('Failed to send message');
+            }
+        } catch (err) {
+            // Only set error if we haven't already succeeded
+            setError('Something went wrong. Please try again.');
+        } finally {
             setIsSubmitting(false);
-            setSubmitted(true);
-            setTimeout(() => setSubmitted(false), 3000);
-        }, 1500);
+        }
     };
 
     return (
@@ -108,6 +126,7 @@ export function ContactForm() {
                         <input 
                             type="text" 
                             id="name" 
+                            name="name"
                             required
                             className="w-full bg-muted/20 border border-border/50 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                             placeholder="John Doe"
@@ -118,6 +137,7 @@ export function ContactForm() {
                         <input 
                             type="email" 
                             id="email" 
+                            name="email"
                             required
                             className="w-full bg-muted/20 border border-border/50 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                             placeholder="john@example.com"
@@ -130,6 +150,7 @@ export function ContactForm() {
                     <input 
                         type="text" 
                         id="subject" 
+                        name="subject"
                         required
                         className="w-full bg-muted/20 border border-border/50 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                         placeholder="Project Inquiry"
@@ -140,12 +161,23 @@ export function ContactForm() {
                     <label htmlFor="message" className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Message</label>
                     <textarea 
                         id="message" 
+                        name="message"
                         rows={5}
                         required
                         className="w-full bg-muted/20 border border-border/50 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
                         placeholder="Tell me about your project..."
                     ></textarea>
                 </div>
+
+                {error && (
+                    <motion.div 
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="text-red-500 text-sm font-medium bg-red-500/10 p-3 rounded-xl border border-red-500/20"
+                    >
+                        {error}
+                    </motion.div>
+                )}
 
                 <motion.button 
                     whileHover={{ scale: 1.02 }}

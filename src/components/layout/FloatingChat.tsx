@@ -16,40 +16,52 @@ export default function FloatingChat() {
     const robotRef = useRef<HTMLButtonElement>(null);
     const [eyePosition, setEyePosition] = useState({ x: 0, y: 0 });
     const [isJumping, setIsJumping] = useState(false);
+    const [idleType, setIdleType] = useState<'none' | 'shiver' | 'spin' | 'jump' | 'dance'>('none');
     const [isHovered, setIsHovered] = useState(false);
 
-    const scrollToBottom = () => {
+    useEffect(() => {
+        const types: ('shiver' | 'spin' | 'jump' | 'dance')[] = ['shiver', 'spin', 'jump', 'dance'];
+        
+        const idleInterval = setInterval(() => {
+            if (!isOpen && !isJumping) {
+                const randomType = types[Math.floor(Math.random() * types.length)];
+                setIdleType(randomType);
+                
+                setTimeout(() => {
+                    setIdleType('none');
+                }, 1500);
+            }
+        }, 10000);
+
+        return () => clearInterval(idleInterval);
+    }, [isOpen, isJumping]);
+
+    const scrollToBottom = useRef(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
+    }).current;
 
     useEffect(() => {
         if (isOpen) {
             scrollToBottom();
         }
-    }, [messages, isOpen]);
+    }, [messages, isOpen, scrollToBottom]);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             if (!robotRef.current) return;
             const rect = robotRef.current.getBoundingClientRect();
-
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-
             const deltaX = e.clientX - centerX;
             const deltaY = e.clientY - centerY;
-
-            const maxMove = 12;
-
             const angle = Math.atan2(deltaY, deltaX);
             const dist = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 800);
             const ratio = dist / 800;
             const easedRatio = 1 - Math.pow(1 - ratio, 3);
-
-            const moveX = Math.cos(angle) * maxMove * easedRatio;
-            const moveY = Math.sin(angle) * maxMove * easedRatio;
-
-            setEyePosition({ x: moveX, y: moveY });
+            setEyePosition({ 
+                x: Math.cos(angle) * 12 * easedRatio, 
+                y: Math.sin(angle) * 12 * easedRatio 
+            });
         };
 
         window.addEventListener('mousemove', handleMouseMove);
@@ -67,21 +79,14 @@ export default function FloatingChat() {
         setInput('');
         setIsLoading(true);
 
-        const response = await sendChatMessage(newMessages);
-
-        setMessages([...newMessages, { role: 'assistant', content: response }]);
-        setIsLoading(false);
-    };
-
-    const eyeBlinkAnimation = {
-        scaleY: [1, 1, 0.1, 1, 1],
-    };
-
-    const eyeBlinkTransition: any = {
-        duration: 4,
-        repeat: Infinity,
-        times: [0, 0.95, 0.97, 0.99, 1],
-        ease: "easeInOut"
+        try {
+            const response = await sendChatMessage(newMessages);
+            setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+        } catch (error) {
+            console.error("Chat error:", error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleBotClick = () => {
@@ -90,7 +95,7 @@ export default function FloatingChat() {
             setTimeout(() => {
                 setIsOpen(true);
                 setIsJumping(false);
-            }, 1200); // 1.2 seconds jump sequence
+            }, 1200);
         } else if (isOpen) {
             setIsOpen(false);
         }
@@ -224,12 +229,22 @@ export default function FloatingChat() {
                                 scaleY: [1, 0.7, 1.3, 1, 0.6, 1],
                                 rotate: [0, 0, 180, 540, 720, 720],
                             }
-                            : { y: isOpen ? 0 : [0, -6, 0] }
+                            : idleType === 'shiver'
+                                ? { x: [0, -2, 2, -2, 2, 0], rotate: [0, -1, 1, -1, 1, 0] }
+                                : idleType === 'spin'
+                                    ? { rotateY: [0, 360], y: [0, -10, 0] }
+                                    : idleType === 'jump'
+                                        ? { y: [0, -20, 0], scaleY: [1, 1.2, 0.8, 1] }
+                                        : idleType === 'dance'
+                                            ? { rotate: [0, -10, 10, -10, 10, 0], x: [0, -5, 5, -5, 5, 0] }
+                                            : { y: isOpen ? 0 : [0, -6, 0] }
                     }
                     transition={
                         isJumping
                             ? { duration: 1.2, times: [0, 0.15, 0.4, 0.7, 0.9, 1], ease: ["easeOut", "easeOut", "easeInOut", "easeIn", "easeOut"] }
-                            : { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                            : idleType !== 'none'
+                                ? { duration: idleType === 'spin' ? 0.8 : 0.6, repeat: 0, ease: "easeInOut" }
+                                : { duration: 3, repeat: Infinity, ease: "easeInOut" }
                     }
                     className="w-full h-full relative"
                 >
@@ -240,13 +255,15 @@ export default function FloatingChat() {
                             animate={
                                 isJumping
                                     ? { rotate: [0, -45, 45, -45, 45, -45, 45, -45, 45, 0] }
-                                    : isHovered
-                                        ? { rotate: [0, -15, 15, -10, 10, 0] }
-                                        : { rotate: eyePosition.x * 3 }
+                                    : idleType !== 'none'
+                                        ? { rotate: [0, 20, -20, 20, -20, 0] }
+                                        : isHovered
+                                            ? { rotate: [0, -15, 15, -10, 10, 0] }
+                                            : { rotate: eyePosition.x * 3 }
                             }
                             transition={
-                                isJumping
-                                    ? { duration: 1.2, ease: "linear" }
+                                isJumping || idleType !== 'none'
+                                    ? { duration: 0.8, ease: "linear" }
                                     : isHovered
                                         ? { repeat: Infinity, duration: 1.5, ease: "easeInOut" }
                                         : { type: "spring", stiffness: 300, damping: 20 }
@@ -263,7 +280,7 @@ export default function FloatingChat() {
                             rotateY: isOpen ? 0 : eyePosition.x * 2.5,
                         }}
                         transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                        className={`w-full h-full rounded-[2rem] flex items-center justify-center relative z-10 overflow-hidden ${isOpen ? 'bg-foreground border border-border shadow-xl' : 'bg-gradient-to-b from-white via-zinc-100 to-zinc-300 border border-white/60 shadow-[0_10px_20px_rgba(0,0,0,0.2),inset_0_-8px_16px_rgba(0,0,0,0.1),inset_0_8px_16px_rgba(255,255,255,0.9)]'}`}
+                        className={`w-full h-full rounded-2xl flex items-center justify-center relative z-10 overflow-hidden ${isOpen ? 'bg-foreground border border-border shadow-xl' : 'bg-gradient-to-b from-white via-zinc-100 to-zinc-300 border border-white/60 shadow-[0_10px_20px_rgba(0,0,0,0.2),inset_0_-8px_16px_rgba(0,0,0,0.1),inset_0_8px_16px_rgba(255,255,255,0.9)]'}`}
                         style={{ transformStyle: "preserve-3d" }}
                     >
                         {isOpen ? (
@@ -292,51 +309,10 @@ export default function FloatingChat() {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: isHovered || isJumping ? 0.8 : 0 }}
                                 />
-
                                 {/* Eyes Container */}
                                 <div className="flex gap-2.5 relative z-10">
-                                    {/* Left Eye */}
-                                    <motion.div
-                                        className="w-[6px] h-[10px] bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.9)] relative overflow-hidden"
-                                        animate={
-                                            isJumping
-                                                ? { scaleY: 0.15, scaleX: 2 }
-                                                : isHovered
-                                                    ? { scaleY: 1.1, scaleX: 1.1 }
-                                                    : eyeBlinkAnimation
-                                        }
-                                        transition={isJumping || isHovered ? { duration: 0.2 } : (eyeBlinkTransition as any)}
-                                    >
-                                        <motion.div
-                                            className="w-[3px] h-[3px] bg-white rounded-full absolute top-[1px] right-[1px]"
-                                            animate={
-                                                isJumping ? { opacity: 0 }
-                                                    : isHovered ? { scale: [1, 1.5, 1], opacity: 1, transition: { repeat: Infinity, duration: 1 } }
-                                                        : { opacity: 0.9 }
-                                            }
-                                        />
-                                    </motion.div>
-                                    {/* Right Eye */}
-                                    <motion.div
-                                        className="w-[6px] h-[10px] bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.9)] relative overflow-hidden"
-                                        animate={
-                                            isJumping
-                                                ? { scaleY: 0.15, scaleX: 2 }
-                                                : isHovered
-                                                    ? { scaleY: 1.1, scaleX: 1.1 }
-                                                    : eyeBlinkAnimation
-                                        }
-                                        transition={isJumping || isHovered ? { duration: 0.2 } : (eyeBlinkTransition as any)}
-                                    >
-                                        <motion.div
-                                            className="w-[3px] h-[3px] bg-white rounded-full absolute top-[1px] right-[1px]"
-                                            animate={
-                                                isJumping ? { opacity: 0 }
-                                                    : isHovered ? { scale: [1, 1.5, 1], opacity: 1, transition: { repeat: Infinity, duration: 1 } }
-                                                        : { opacity: 0.9 }
-                                            }
-                                        />
-                                    </motion.div>
+                                    <MochikaEye side="left" idleType={idleType} isJumping={isJumping} />
+                                    <MochikaEye side="right" idleType={idleType} isJumping={isJumping} />
                                 </div>
                             </motion.div>
                         )}
@@ -351,6 +327,47 @@ export default function FloatingChat() {
                     )}
                 </motion.div>
             </motion.button>
+        </div>
+    );
+}
+
+function MochikaEye({ side, idleType, isJumping }: { 
+    side: 'left' | 'right', 
+    idleType: string, 
+    isJumping: boolean 
+}) {
+    const isHappy = idleType === 'jump' || isJumping;
+    const isExcited = idleType === 'spin';
+    
+    // Rotations for ^ ^
+    const rot1 = isHappy ? -45 : (isExcited ? (side === 'left' ? 45 : -45) : 0);
+    const rot2 = isHappy ? 45 : (isExcited ? (side === 'left' ? -45 : 45) : 0);
+    
+    // Positions
+    const x1 = isHappy ? -3 : 0;
+    const x2 = isHappy ? 3 : 0;
+    const y2 = isExcited ? 6 : -2;
+
+    return (
+        <div className="relative w-2.5 h-3.5 flex items-center justify-center">
+            <motion.div
+                className="bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.9)] rounded-full absolute"
+                animate={
+                    isHappy || isExcited
+                        ? { height: 2, width: 10, rotate: rot1, y: -2, x: x1 }
+                        : idleType === 'shiver' || idleType === 'dance'
+                            ? { height: 2, width: 10, rotate: 0, y: 0, x: 0 }
+                            : { height: 10, width: 6, rotate: 0, y: 0, x: 0 }
+                }
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            />
+            {(isHappy || isExcited) && (
+                <motion.div
+                    className="bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.9)] rounded-full absolute"
+                    animate={{ height: 2, width: 10, rotate: rot2, y: isHappy ? -2 : y2, x: isHappy ? x2 : 0 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                />
+            )}
         </div>
     );
 }

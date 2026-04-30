@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import { Trophy, Award, Briefcase, Star, Plus } from "lucide-react";
 import Link from 'next/link';
+import Image from 'next/image';
 import achievementsData from '@/data/achievements.json';
 import DetailModal from '@/components/shared/DetailModal';
 
@@ -55,10 +56,13 @@ export default function Achievements({ limit }: AchievementsProps) {
                             >
                                 <div className="aspect-video bg-muted relative overflow-hidden flex items-center justify-center">
                                     {item.image ? (
-                                        <img 
+                                        <Image 
                                             src={item.image} 
                                             alt={item.title} 
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                            fill
+                                            unoptimized
+                                            className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         />
                                     ) : (
                                         <div className="text-primary/40 group-hover:scale-110 transition-transform duration-700">

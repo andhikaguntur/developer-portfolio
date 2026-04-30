@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Box } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import projectsData from '@/data/projects.json';
 import DetailModal from '@/components/shared/DetailModal';
 
@@ -42,10 +43,13 @@ export default function Projects({ limit }: ProjectsProps) {
                         >
                             <div className="aspect-video bg-muted relative overflow-hidden">
                                 {project.image ? (
-                                    <img 
+                                    <Image 
                                         src={project.image} 
                                         alt={project.title} 
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                        fill
+                                        unoptimized
+                                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />
                                 ) : (
                                     <div className="absolute inset-0 flex items-center justify-center text-muted-foreground font-mono text-xs uppercase tracking-widest">

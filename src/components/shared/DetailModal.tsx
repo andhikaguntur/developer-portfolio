@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Github, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect } from 'react';
 
 interface DetailModalProps {
@@ -77,10 +78,13 @@ export default function DetailModal({
                                 {/* Media / Image */}
                                 {image && (
                                     <div className="aspect-video w-full rounded-2xl overflow-hidden bg-muted relative">
-                                        <img 
+                                        <Image 
                                             src={image} 
                                             alt={title} 
-                                            className="w-full h-full object-cover"
+                                            fill
+                                            unoptimized
+                                            className="object-cover"
+                                            sizes="(max-width: 768px) 100vw, 800px"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
                                     </div>
