@@ -31,7 +31,7 @@ export default function AboutPage() {
 
                     <div className="space-y-6 text-lg md:text-xl text-foreground font-light leading-relaxed border-l-4 border-primary pl-6">
                         <p>
-                            I am an <strong className="font-semibold text-foreground">Information Systems undergraduate at UPN "Veteran" Yogyakarta</strong> (GPA 3.85 / 4.00) and an <strong className="font-semibold text-primary">aspiring IT Business Analyst</strong> with a keen interest in digital solution development.
+                            I am an <strong className="font-semibold text-foreground">Information Systems undergraduate at UPN &quot;Veteran&quot; Yogyakarta</strong> (GPA 3.85 / 4.00) and an <strong className="font-semibold text-primary">aspiring IT Business Analyst</strong> with a keen interest in digital solution development.
                         </p>
                         <p>
                             I focus on bridging business requirements and technical execution—applying business process modeling with <strong className="font-medium text-foreground">BPMN</strong>, formulating structured <strong className="font-medium text-foreground">SRS & PRD</strong> specifications, designing relational database schemas, and understanding scalable web architectures.

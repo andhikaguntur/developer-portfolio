@@ -11,9 +11,12 @@ export default function LoadingBar() {
 
   useEffect(() => {
     // Show loading bar on path change
-    setIsLoading(true);
-    const timer = setTimeout(() => setIsLoading(false), 600);
-    return () => clearTimeout(timer);
+    const startTimer = setTimeout(() => setIsLoading(true), 0);
+    const endTimer = setTimeout(() => setIsLoading(false), 600);
+    return () => {
+      clearTimeout(startTimer);
+      clearTimeout(endTimer);
+    };
   }, [pathname, searchParams]);
 
   return (

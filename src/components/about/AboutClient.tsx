@@ -4,7 +4,29 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import dudukPng from '@/assets/duduk.jpg';
 import { useState, useRef, MouseEvent } from 'react';
-import { ChevronDown, ChevronUp, MapPin, Calendar, Briefcase, GraduationCap, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, MapPin, Calendar, Briefcase, CheckCircle2 } from 'lucide-react';
+
+export interface ExperienceItem {
+    title: string;
+    company: string;
+    logo: string;
+    period: string;
+    location: string;
+    type: string;
+    responsibilities: string[];
+    learnings: string[];
+    impact: string[];
+}
+
+export interface EducationItem {
+    school: string;
+    degree: string;
+    gpa: string;
+    logo: string;
+    period: string;
+    location: string;
+    coursework?: string;
+}
 
 // The Interactive Spotlight Image Component
 export function SpotlightImage() {
@@ -199,7 +221,7 @@ export function EducationCard({
     );
 }
 
-export function ExperienceList({ items }: { items: any[] }) {
+export function ExperienceList({ items }: { items: ExperienceItem[] }) {
     const [showAll, setShowAll] = useState(false);
     const displayedItems = showAll ? items : items.slice(0, 2);
 
@@ -244,7 +266,7 @@ export function ExperienceList({ items }: { items: any[] }) {
     );
 }
 
-export function EducationList({ items }: { items: any[] }) {
+export function EducationList({ items }: { items: EducationItem[] }) {
     const [showAll, setShowAll] = useState(false);
     const displayedItems = showAll ? items : items.slice(0, 2);
 

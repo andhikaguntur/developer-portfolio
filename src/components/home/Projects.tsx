@@ -8,12 +8,23 @@ import Image from 'next/image';
 import projectsData from '@/data/projects.json';
 import DetailModal from '@/components/shared/DetailModal';
 
+interface ProjectItem {
+    title: string;
+    subtitle?: string;
+    description: string;
+    stack: string[];
+    github?: string;
+    live?: string;
+    year: string;
+    image: string;
+}
+
 interface ProjectsProps {
     limit?: number;
 }
 
 export default function Projects({ limit }: ProjectsProps) {
-    const [selectedProject, setSelectedProject] = useState<any>(null);
+    const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
     const items = limit ? projectsData.slice(0, limit) : projectsData;
 
     return (
@@ -31,7 +42,7 @@ export default function Projects({ limit }: ProjectsProps) {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {items.map((project: any, index: number) => {
+                    {items.map((project: ProjectItem, index: number) => {
                         return (
                             <motion.div
                                 key={index}

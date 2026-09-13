@@ -1,6 +1,7 @@
 'use server';
 
 import { Groq } from 'groq-sdk';
+import type { ChatCompletionMessageParam } from 'groq-sdk/resources/chat/completions';
 
 const groq = new Groq({
   apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
@@ -60,7 +61,7 @@ export async function sendChatMessage(chatHistory: ChatMessage[]) {
     ];
 
     const response = await groq.chat.completions.create({
-      messages: messages as any,
+      messages: messages as ChatCompletionMessageParam[],
       model: "openai/gpt-oss-120b",
       temperature: 0.1, // Wajib 0.1 / 0 agar deterministik, patuh 100% pada data, dan tidak halu
       max_tokens: 500,

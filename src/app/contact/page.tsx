@@ -21,7 +21,7 @@ export default function ContactPage() {
                 
                 <div className="w-full text-center mb-16">
                     <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">
-                        Let's <span className="text-muted-foreground italic">Connect</span>
+                        Let&apos;s <span className="text-muted-foreground italic">Connect</span>
                     </h1>
                     <p className="text-muted-foreground text-sm uppercase tracking-widest">
                         Available for Opportunities & Collaborations

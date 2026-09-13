@@ -46,15 +46,11 @@ export default function FloatingChat() {
         return () => clearInterval(idleInterval);
     }, [isOpen, isJumping]);
 
-    const scrollToBottom = useRef(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }).current;
-
     useEffect(() => {
         if (isOpen) {
-            scrollToBottom();
+            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
         }
-    }, [messages, isOpen, scrollToBottom]);
+    }, [messages, isOpen]);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {

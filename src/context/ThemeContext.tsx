@@ -18,11 +18,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         // Check local storage or system preference
         const storedTheme = localStorage.getItem('theme') as Theme | null;
         if (storedTheme) {
-            setTheme(storedTheme);
             document.documentElement.classList.toggle('dark', storedTheme === 'dark');
+            const timer = setTimeout(() => setTheme(storedTheme), 0);
+            return () => clearTimeout(timer);
         } else {
             // Default to dark for this "antigravity" vibe if no preference
-            setTheme('dark');
             document.documentElement.classList.add('dark');
         }
     }, []);

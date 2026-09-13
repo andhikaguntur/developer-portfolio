@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
     Terminal,
     Database,
@@ -259,7 +258,7 @@ export default function Hero() {
                             className="bg-background border border-border/60 rounded-3xl p-8 shadow-md transition-all"
                         >
                             <p className="text-foreground text-lg md:text-xl font-light leading-relaxed border-l-4 border-primary pl-6">
-                                Information Systems undergraduate at <strong className="font-semibold text-foreground">UPN "Veteran" Yogyakarta</strong> with a <strong className="font-semibold text-primary">GPA of 3.85</strong>, aspiring to pursue opportunities in <strong className="font-semibold text-foreground">IT Business Analysis</strong> and <strong className="font-semibold text-foreground">Digital Solution Development</strong>. Experienced in academic mentorship and organizational roles, with practical competencies in business process modeling, requirements specification, database management, and system design.
+                                Information Systems undergraduate at <strong className="font-semibold text-foreground">UPN &quot;Veteran&quot; Yogyakarta</strong> with a <strong className="font-semibold text-primary">GPA of 3.85</strong>, aspiring to pursue opportunities in <strong className="font-semibold text-foreground">IT Business Analysis</strong> and <strong className="font-semibold text-foreground">Digital Solution Development</strong>. Experienced in academic mentorship and organizational roles, with practical competencies in business process modeling, requirements specification, database management, and system design.
                             </p>
                         </motion.div>
                     </div>

@@ -8,12 +8,23 @@ import Image from 'next/image';
 import achievementsData from '@/data/achievements.json';
 import DetailModal from '@/components/shared/DetailModal';
 
+interface AchievementItem {
+    id: number;
+    year: string;
+    title: string;
+    organization: string;
+    description: string;
+    image: string;
+    github?: string;
+    live?: string;
+}
+
 interface AchievementsProps {
     limit?: number;
 }
 
 export default function Achievements({ limit }: AchievementsProps) {
-    const [selectedAchievement, setSelectedAchievement] = useState<any>(null);
+    const [selectedAchievement, setSelectedAchievement] = useState<AchievementItem | null>(null);
     const items = limit ? achievementsData.slice(0, limit) : achievementsData;
 
     return (
@@ -34,7 +45,7 @@ export default function Achievements({ limit }: AchievementsProps) {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {items.map((item: any, index: number) => {
+                    {items.map((item: AchievementItem, index: number) => {
                         return (
                             <motion.div
                                 key={item.id}
