@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import Projects from '@/components/home/Projects';
 
 export const metadata: Metadata = {
-  title: "Projects | Andhika Guntur - Software Showcase",
-  description: "Explore a gallery of projects developed by Andhika Guntur, featuring web applications, APIs, and CLI tools built with modern technologies.",
-  keywords: ["Software Projects", "React Projects", "Next.js Showcase", "Golang Backend", "Developer Portfolio"],
+  title: "Projects | Andhika Guntur - Digital Solutions & System Analysis",
+  description: "Explore business process analysis, Software Requirements Specification (SRS/PRD), and digital solution projects developed by Andhika Guntur Ramadan.",
+  keywords: [
+    "Software Projects",
+    "Business Process Analysis",
+    "BPMN",
+    "Requirements Engineering",
+    "SRS",
+    "PRD",
+    "Andhika Guntur Portfolio"
+  ],
 };
 
 export default function ProjectsPage() {

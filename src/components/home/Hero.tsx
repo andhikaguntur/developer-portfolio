@@ -6,28 +6,30 @@ import Link from 'next/link';
 import {
     Terminal,
     Database,
-    Server,
-    Layout,
-    Smartphone,
     Globe,
-    Box,
     Cpu,
-    Cloud,
-    Layers,
     MapPin,
     Briefcase,
     Mail,
     Github,
     Instagram,
     Linkedin,
-    Bot,
-    Sparkles
+    FileText,
+    Workflow,
+    GitBranch,
+    Binary,
+    Boxes,
+    Sparkles,
+    CheckCircle2,
+    Code2,
+    BarChart3,
+    Layers
 } from 'lucide-react';
 
 const SOCIALS = [
     { name: 'GitHub', href: 'https://github.com/andhikaguntur', icon: Github },
     { name: 'Instagram', href: 'https://instagram.com/andhikaguntur', icon: Instagram },
-    { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
+    { name: 'LinkedIn', href: 'https://linkedin.com/in/andhika-guntur', icon: Linkedin },
 ];
 
 import avatarImage from '../../assets/ppporto.jpg';
@@ -68,7 +70,12 @@ const TypewriterEffect = ({ text }: { text: string }) => {
 };
 
 function CyclingButton() {
-    const phrases = ["Let's Connect", "Build Magic", "Crafting Experiences", "Shape The Future"];
+    const phrases = [
+        "Aspiring IT Business Analyst",
+        "Business Process Modeling",
+        "Requirements Engineering",
+        "Digital Solutions Enthusiast"
+    ];
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
@@ -85,7 +92,7 @@ function CyclingButton() {
                     animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                     exit={{ y: -10, opacity: 0, filter: "blur(2px)" }}
                     transition={{ duration: 0.6, ease: "easeInOut" }}
-                    className="absolute text-xs md:text-sm font-semibold uppercase tracking-[0.3em] text-primary"
+                    className="absolute text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-primary whitespace-nowrap"
                 >
                     {phrases[index]}
                 </motion.span>
@@ -93,7 +100,6 @@ function CyclingButton() {
         </div>
     );
 }
-
 
 function MiniMochika() {
     return (
@@ -120,7 +126,7 @@ function MiniMochika() {
                 <div className="absolute -bottom-1 left-4 w-2 h-2 bg-foreground rotate-45" />
             </motion.div>
 
-            {/* Mochika Body - Identical to FloatingChat version */}
+            {/* Mochika Body */}
             <div className="w-20 h-20 bg-gradient-to-b from-white via-zinc-100 to-zinc-300 rounded-2xl border border-white/60 shadow-[0_10px_20px_rgba(0,0,0,0.2),inset_0_-8px_16px_rgba(0,0,0,0.1),inset_0_8px_16px_rgba(255,255,255,0.9)] relative flex items-center justify-center overflow-visible">
                 
                 {/* Antenna */}
@@ -162,8 +168,6 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.1 }}
                     className="w-full md:w-[320px] shrink-0 flex flex-col gap-6"
                 >
-
-
                     {/* Profile Avatar */}
                     <div className="relative w-48 md:w-full max-w-[260px] mx-auto md:mx-0">
                         <motion.div
@@ -175,10 +179,11 @@ export default function Hero() {
                         >
                             <Image
                                 src={avatarImage}
-                                alt="Andhika Guntur Avatar"
+                                alt="Andhika Guntur Ramadan"
                                 fill
                                 sizes="(max-width: 768px) 192px, 260px"
                                 className="object-cover transition-all duration-500 filter hover:grayscale-0 grayscale"
+                                priority
                             />
                         </motion.div>
                         <AnimatePresence>
@@ -190,7 +195,10 @@ export default function Hero() {
                         <h1 className="text-3xl lg:text-4xl font-black font-heading tracking-tighter text-foreground whitespace-nowrap">
                             <TypewriterEffect text="Andhika Guntur" />
                         </h1>
-                        <div className="flex items-center justify-center md:justify-start gap-3 mt-1">
+                        <p className="text-xs font-semibold text-primary tracking-wider uppercase mt-0.5">
+                            Andhika Guntur Ramadan
+                        </p>
+                        <div className="flex items-center justify-center md:justify-start gap-3 mt-2">
                             {SOCIALS.map((social) => (
                                 <a
                                     key={social.name}
@@ -206,122 +214,230 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    {/* Contact Button */}
+                    {/* Dynamic Cycling Focus */}
                     <CyclingButton />
 
-                    {/* Bio / Small Stats */}
+                    {/* Bio / Key Details */}
                     <div className="text-sm text-foreground flex flex-col gap-4 pt-6 border-t border-border/50">
                         <div className="flex items-center gap-3 group cursor-default">
-                            <Briefcase size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                            <span className="text-foreground font-medium group-hover:text-primary transition-colors">Software Engineer</span>
+                            <Briefcase size={18} className="text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                            <span className="text-foreground font-medium group-hover:text-primary transition-colors text-xs leading-snug">
+                                Aspiring IT Business Analyst & Digital Solutions
+                            </span>
                         </div>
                         <div className="flex items-center gap-3 group cursor-default">
-                            <MapPin size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                            <span className="text-foreground font-medium group-hover:text-primary transition-colors">Earth, Internet</span>
+                            <MapPin size={18} className="text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                            <span className="text-foreground font-medium group-hover:text-primary transition-colors text-xs">
+                                Sleman, D.I. Yogyakarta
+                            </span>
                         </div>
                         <div className="flex items-center gap-3 group">
-                            <Mail size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                            <a href="mailto:andhikaguntur77.ag@gmail.com" className="text-foreground font-medium hover:text-primary transition-colors">andhikaguntur77.ag@gmail.com</a>
+                            <Mail size={18} className="text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                            <a href="mailto:andhikaguntur77.ag@gmail.com" className="text-foreground font-medium hover:text-primary transition-colors text-xs break-all">
+                                andhikaguntur77.ag@gmail.com
+                            </a>
                         </div>
                     </div>
                 </motion.div>
 
-                {/* Right Area (Summary & Skills) */}
+                {/* Right Area (Summary & Monochrome Categorized Skills) */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isDone ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.6, delay: 0.3 }}
                     className="flex-1 flex flex-col gap-16 mt-12 md:mt-0"
                 >
-                    {/* Small Summary Paragraph */}
+                    {/* Summary Paragraph */}
                     <div className="space-y-6">
                         <div className="mb-6">
                             <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
-                                Professional <span className="text-muted-foreground italic">Overview</span>
+                                Professional <span className="text-muted-foreground italic">Summary</span>
                             </h2>
                         </div>
                         <motion.div
                             whileHover={{ y: -2, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.15)" }}
                             className="bg-background border border-border/60 rounded-3xl p-8 shadow-md transition-all"
                         >
-                            <p className="text-foreground text-xl font-light leading-relaxed border-l-4 border-primary pl-6">
-                                I am a passionate software engineer specializing in building elegant, user-centric web applications. I bridge the gap between design and robust functionality, ensuring every digital experience is performant, accessible, and beautifully crafted. My professional journey spans across various industries, where I've delivered scalable architectures and engaging user interfaces.
+                            <p className="text-foreground text-lg md:text-xl font-light leading-relaxed border-l-4 border-primary pl-6">
+                                Information Systems undergraduate at <strong className="font-semibold text-foreground">UPN "Veteran" Yogyakarta</strong> with a <strong className="font-semibold text-primary">GPA of 3.85</strong>, aspiring to pursue opportunities in <strong className="font-semibold text-foreground">IT Business Analysis</strong> and <strong className="font-semibold text-foreground">Digital Solution Development</strong>. Experienced in academic mentorship and organizational roles, with practical competencies in business process modeling, requirements specification, database management, and system design.
                             </p>
                         </motion.div>
                     </div>
 
-                    {/* Skills Section */}
+                    {/* Categorized Skills Section - Unified Monochrome Aesthetic */}
                     <div className="space-y-6">
                         <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
                             <div>
                                 <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
-                                    Skills <span className="text-muted-foreground italic">Overview</span>
+                                    Skills & <span className="text-muted-foreground italic">Competencies</span>
                                 </h2>
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-8">
-                            {/* Hard Skills */}
+                        <div className="flex flex-col gap-6">
+                            {/* Category 1: Business & System Analysis */}
                             <motion.div
                                 whileHover={{ y: -2, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.15)" }}
-                                className="border border-border/60 rounded-3xl p-8 transition-all bg-background shadow-sm"
+                                className="border border-border/60 rounded-3xl p-6 md:p-8 transition-all bg-background shadow-sm hover:border-border"
                             >
-                                <div className="flex justify-between items-start mb-4">
-                                    <h3 className="text-2xl font-black font-heading text-primary tracking-tight">Hard Skills</h3>
-                                    <span className="text-[10px] px-3 py-1 bg-muted text-foreground rounded-full uppercase tracking-widest font-bold">Technical</span>
+                                <div className="flex justify-between items-start mb-3">
+                                    <div className="flex items-center gap-3">
+                                        <div className="p-2.5 rounded-xl bg-muted border border-border text-foreground">
+                                            <Workflow size={20} />
+                                        </div>
+                                        <h3 className="text-xl md:text-2xl font-black font-heading text-foreground tracking-tight">
+                                            Business & System Analysis
+                                        </h3>
+                                    </div>
+                                    <span className="text-[10px] px-3 py-1 bg-muted text-muted-foreground border border-border/50 rounded-full uppercase tracking-widest font-bold">
+                                        Analysis & Design
+                                    </span>
                                 </div>
-                                <p className="text-base text-muted-foreground mb-8">Languages, frameworks, and tools I use daily to build robust systems.</p>
+                                <p className="text-sm text-muted-foreground mb-6">
+                                    Methodologies and frameworks used for discovering requirements, modeling workflows, and designing solutions.
+                                </p>
 
-                                <div className="flex flex-wrap gap-4">
+                                <div className="flex flex-wrap gap-3">
                                     {[
-                                        { name: 'TypeScript', icon: Terminal },
-                                        { name: 'React', icon: Layout },
-                                        { name: 'Next.js', icon: Globe },
-                                        { name: 'Node.js', icon: Server },
-                                        { name: 'PostgreSQL', icon: Database },
-                                        { name: 'Docker', icon: Box },
-                                        { name: 'AWS', icon: Cloud },
-                                        { name: 'TailwindCSS', icon: Layers },
-                                        { name: 'Python', icon: Cpu },
-                                        { name: 'React Native', icon: Smartphone },
+                                        { name: 'Requirement Analysis', icon: FileText },
+                                        { name: 'Business Process Modeling (BPMN)', icon: Workflow },
+                                        { name: 'Software Requirements Specification (SRS)', icon: CheckCircle2 },
+                                        { name: 'Product Requirements Document (PRD)', icon: FileText },
+                                        { name: 'System Design & Architecture', icon: Boxes },
+                                        { name: 'Data & Process Flow Analysis', icon: BarChart3 },
                                     ].map((skill) => (
                                         <motion.div
                                             key={skill.name}
-                                            whileHover={{ scale: 1.05 }}
-                                            className="flex items-center gap-2.5 px-4 py-2.5 border border-border rounded-xl transition-all cursor-default bg-background shadow-sm hover:bg-muted"
+                                            whileHover={{ scale: 1.04 }}
+                                            className="flex items-center gap-2.5 px-3.5 py-2 border border-border/60 rounded-xl transition-all cursor-default bg-muted/20 hover:bg-muted shadow-xs hover:border-border text-foreground"
                                         >
-                                            <skill.icon size={18} className="text-primary" />
-                                            <span className="text-sm font-semibold text-foreground tracking-wide">{skill.name}</span>
+                                            <skill.icon size={16} className="text-foreground shrink-0" />
+                                            <span className="text-xs md:text-sm font-semibold tracking-wide">{skill.name}</span>
                                         </motion.div>
                                     ))}
                                 </div>
                             </motion.div>
 
-                            {/* Soft Skills */}
+                            {/* Category 2: Web & Database Development */}
                             <motion.div
                                 whileHover={{ y: -2, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.15)" }}
-                                className="border border-border/60 rounded-3xl p-8 transition-all bg-background shadow-sm"
+                                className="border border-border/60 rounded-3xl p-6 md:p-8 transition-all bg-background shadow-sm hover:border-border"
                             >
-                                <div className="flex justify-between items-start mb-4">
-                                    <h3 className="text-2xl font-black font-heading text-emerald-500 tracking-tight">Soft Skills</h3>
-                                    <span className="text-[10px] px-3 py-1 bg-muted text-foreground rounded-full uppercase tracking-widest font-bold">Interpersonal</span>
+                                <div className="flex justify-between items-start mb-3">
+                                    <div className="flex items-center gap-3">
+                                        <div className="p-2.5 rounded-xl bg-muted border border-border text-foreground">
+                                            <Code2 size={20} />
+                                        </div>
+                                        <h3 className="text-xl md:text-2xl font-black font-heading text-foreground tracking-tight">
+                                            Web & Database Development
+                                        </h3>
+                                    </div>
+                                    <span className="text-[10px] px-3 py-1 bg-muted text-muted-foreground border border-border/50 rounded-full uppercase tracking-widest font-bold">
+                                        Development
+                                    </span>
                                 </div>
-                                <p className="text-base text-muted-foreground mb-8">Abilities that help me collaborate, lead, and adapt in dynamic environments.</p>
+                                <p className="text-sm text-muted-foreground mb-6">
+                                    Technical foundation in database modeling, querying, structured web development, and algorithms.
+                                </p>
 
                                 <div className="flex flex-wrap gap-3">
+                                    {[
+                                        { name: 'Database Management & SQL', icon: Database },
+                                        { name: 'Database Schema Design', icon: Layers },
+                                        { name: 'Web Dev (HTML, CSS, JavaScript)', icon: Globe },
+                                        { name: 'Backend Scripting (PHP)', icon: Cpu },
+                                        { name: 'Algorithms & Data Structures', icon: Binary },
+                                    ].map((skill) => (
+                                        <motion.div
+                                            key={skill.name}
+                                            whileHover={{ scale: 1.04 }}
+                                            className="flex items-center gap-2.5 px-3.5 py-2 border border-border/60 rounded-xl transition-all cursor-default bg-muted/20 hover:bg-muted shadow-xs hover:border-border text-foreground"
+                                        >
+                                            <skill.icon size={16} className="text-foreground shrink-0" />
+                                            <span className="text-xs md:text-sm font-semibold tracking-wide">{skill.name}</span>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
+
+                            {/* Category 3: Tools & Workspace */}
+                            <motion.div
+                                whileHover={{ y: -2, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.15)" }}
+                                className="border border-border/60 rounded-3xl p-6 md:p-8 transition-all bg-background shadow-sm hover:border-border"
+                            >
+                                <div className="flex justify-between items-start mb-3">
+                                    <div className="flex items-center gap-3">
+                                        <div className="p-2.5 rounded-xl bg-muted border border-border text-foreground">
+                                            <Sparkles size={20} />
+                                        </div>
+                                        <h3 className="text-xl md:text-2xl font-black font-heading text-foreground tracking-tight">
+                                            Tools & Workspace
+                                        </h3>
+                                    </div>
+                                    <span className="text-[10px] px-3 py-1 bg-muted text-muted-foreground border border-border/50 rounded-full uppercase tracking-widest font-bold">
+                                        Tooling
+                                    </span>
+                                </div>
+                                <p className="text-sm text-muted-foreground mb-6">
+                                    Modern developer tools, version control, and AI-assisted environments utilized in daily workflows.
+                                </p>
+
+                                <div className="flex flex-wrap gap-3">
+                                    {[
+                                        { name: 'Antigravity (AI IDE)', icon: Sparkles },
+                                        { name: 'VS Code', icon: Terminal },
+                                        { name: 'Git & GitHub', icon: GitBranch },
+                                        { name: 'Diagramming & BPMN Tools', icon: Workflow },
+                                    ].map((skill) => (
+                                        <motion.div
+                                            key={skill.name}
+                                            whileHover={{ scale: 1.04 }}
+                                            className="flex items-center gap-2.5 px-3.5 py-2 border border-border/60 rounded-xl transition-all cursor-default bg-muted/20 hover:bg-muted shadow-xs hover:border-border text-foreground"
+                                        >
+                                            <skill.icon size={16} className="text-foreground shrink-0" />
+                                            <span className="text-xs md:text-sm font-semibold tracking-wide">{skill.name}</span>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
+
+                            {/* Category 4: Interpersonal & Professional */}
+                            <motion.div
+                                whileHover={{ y: -2, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.15)" }}
+                                className="border border-border/60 rounded-3xl p-6 md:p-8 transition-all bg-background shadow-sm hover:border-border"
+                            >
+                                <div className="flex justify-between items-start mb-3">
+                                    <div className="flex items-center gap-3">
+                                        <div className="p-2.5 rounded-xl bg-muted border border-border text-foreground">
+                                            <CheckCircle2 size={20} />
+                                        </div>
+                                        <h3 className="text-xl md:text-2xl font-black font-heading text-foreground tracking-tight">
+                                            Interpersonal & Professional
+                                        </h3>
+                                    </div>
+                                    <span className="text-[10px] px-3 py-1 bg-muted text-muted-foreground border border-border/50 rounded-full uppercase tracking-widest font-bold">
+                                        Soft Skills
+                                    </span>
+                                </div>
+                                <p className="text-sm text-muted-foreground mb-6">
+                                    Key attributes for cross-functional communication, team collaboration, and structured problem resolution.
+                                </p>
+
+                                <div className="flex flex-wrap gap-2.5">
                                     {[
                                         'Problem Solving',
                                         'Communication',
                                         'Team Leadership',
+                                        'Stakeholder Collaboration',
+                                        'Analytical & Critical Thinking',
                                         'Time Management',
                                         'Adaptability',
-                                        'Critical Thinking',
-                                        'Agile Methodology'
+                                        'Academic Mentorship'
                                     ].map((skill) => (
                                         <motion.span
                                             key={skill}
-                                            whileHover={{ scale: 1.05 }}
-                                            className="px-5 py-2.5 text-sm font-bold tracking-wide border border-border bg-muted/30 rounded-xl text-foreground transition-all cursor-default shadow-sm hover:border-primary hover:text-primary"
+                                            whileHover={{ scale: 1.04 }}
+                                            className="px-4 py-2 text-xs md:text-sm font-bold tracking-wide border border-border/60 bg-muted/20 rounded-xl text-foreground transition-all cursor-default shadow-xs hover:bg-muted hover:border-border"
                                         >
                                             {skill}
                                         </motion.span>

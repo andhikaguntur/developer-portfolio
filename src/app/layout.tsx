@@ -13,8 +13,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Andhika Guntur | Fullstack Developer Portfolio",
-  description: "Personal developer portfolio of Andhika Guntur, focusing on modern web technologies.",
+  title: "Andhika Guntur | Aspiring IT Business Analyst & Digital Solutions",
+  description: "Personal portfolio of Andhika Guntur Ramadan - Information Systems undergraduate at UPN \"Veteran\" Yogyakarta focusing on IT Business Analysis, Requirements Engineering, Database Systems, and Digital Solutions.",
 };
 
 import { ThemeProvider } from "@/context/ThemeContext";

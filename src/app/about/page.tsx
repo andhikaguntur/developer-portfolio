@@ -4,9 +4,19 @@ import { SpotlightImage, ExperienceList, EducationList, AnimatedAboutSection } f
 import aboutData from '@/data/about.json';
 
 export const metadata: Metadata = {
-    title: "About | Andhika Guntur - Full-Stack Developer",
-    description: "Learn more about Andhika Guntur's journey, professional experience in Golang and React, and academic background in Information Systems.",
-    keywords: ["About Andhika Guntur", "Developer Experience", "Golang Developer", "Universitas Jambi", "Software Engineer Bio"],
+    title: "About | Andhika Guntur - Aspiring IT Business Analyst",
+    description: "Learn more about Andhika Guntur Ramadan's journey as an Information Systems undergraduate at UPN \"Veteran\" Yogyakarta, focusing on Business Process Analysis, Requirements Engineering, Database Systems, and Digital Solutions.",
+    keywords: [
+        "About Andhika Guntur",
+        "Andhika Guntur Ramadan",
+        "Information Systems",
+        "Aspiring IT Business Analyst",
+        "IT Business Analyst Intern",
+        "UPN Veteran Yogyakarta",
+        "Requirements Engineering",
+        "BPMN",
+        "System Design"
+    ],
 };
 
 export default function AboutPage() {
@@ -21,10 +31,13 @@ export default function AboutPage() {
 
                     <div className="space-y-6 text-lg md:text-xl text-foreground font-light leading-relaxed border-l-4 border-primary pl-6">
                         <p>
-                            I am a dedicated Full-Stack Developer with a passion for creating immersive digital experiences. My approach combines technical rigor with a keen eye for design, ensuring that every project is not only functional but also emotionally resonant.
+                            I am an <strong className="font-semibold text-foreground">Information Systems undergraduate at UPN "Veteran" Yogyakarta</strong> (GPA 3.85 / 4.00) and an <strong className="font-semibold text-primary">aspiring IT Business Analyst</strong> with a keen interest in digital solution development.
                         </p>
                         <p>
-                            With years of experience in the modern web ecosystem, I've mastered tools like React, Next.js, and Node.js. I believe in continuous learning and often spend my time experimenting with new frameworks or contributing to open-source projects.
+                            I focus on bridging business requirements and technical execution—applying business process modeling with <strong className="font-medium text-foreground">BPMN</strong>, formulating structured <strong className="font-medium text-foreground">SRS & PRD</strong> specifications, designing relational database schemas, and understanding scalable web architectures.
+                        </p>
+                        <p>
+                            Through active academic leadership as Head of Academic & Professional Development at HIMASISFO and practical mentorship as a Laboratory Assistant, I continuously strengthen my analytical thinking, stakeholder communication, and problem-solving abilities.
                         </p>
                     </div>
                 </AnimatedAboutSection>
@@ -36,11 +49,11 @@ export default function AboutPage() {
             </div>
 
             <div className="max-w-5xl mx-auto mt-32 space-y-24">
-                {/* Career Section */}
+                {/* Career / Organizational Experience Section */}
                 <section>
                     <h2 className="text-3xl font-black tracking-tighter mb-8 flex items-center gap-3 border-b border-border/50 pb-4">
                         <Briefcase className="text-primary" size={28} />
-                        Experience
+                        Work & Organizational Experience
                     </h2>
                     
                     <ExperienceList items={aboutData.experience} />

@@ -8,7 +8,7 @@ import { sendEmail } from '@/app/actions/contact';
 const SOCIALS = [
     { name: 'GitHub', href: 'https://github.com/andhikaguntur', icon: Github },
     { name: 'Instagram', href: 'https://instagram.com/andhikaguntur', icon: Instagram },
-    { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
+    { name: 'LinkedIn', href: 'https://linkedin.com/in/andhika-guntur', icon: Linkedin },
 ];
 
 export function ContactInfo() {
@@ -22,7 +22,7 @@ export function ContactInfo() {
             <div>
                 <h3 className="text-xl font-bold font-heading mb-4">Contact Information</h3>
                 <p className="text-muted-foreground font-light leading-relaxed mb-8">
-                    Looking to start a new project or just want to say hi? I'm always open to discussing new opportunities and creative ideas.
+                    Interested in discussing IT business analysis, requirements engineering, digital solutions, or collaboration? Feel free to reach out.
                 </p>
             </div>
 
@@ -43,7 +43,7 @@ export function ContactInfo() {
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground uppercase tracking-widest font-semibold mb-1">Location</p>
-                        <p className="text-foreground font-medium">Earth, Internet</p>
+                        <p className="text-foreground font-medium">Sleman, D.I. Yogyakarta</p>
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@ export function ContactInfo() {
                     </div>
                     <div>
                         <p className="text-sm text-muted-foreground uppercase tracking-widest font-semibold mb-1">WhatsApp</p>
-                        <a href="https://wa.me/628123456789" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors font-medium">+62 812-3456-789</a>
+                        <a href="https://wa.me/6281281108030" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors font-medium">+62 812 8110 8030</a>
                     </div>
                 </div>
             </div>
@@ -89,23 +89,24 @@ export function ContactForm() {
         e.preventDefault();
         setIsSubmitting(true);
         setError(null);
+        const form = e.currentTarget;
 
         try {
-            const formData = new FormData(e.currentTarget);
+            const formData = new FormData(form);
             const result = await sendEmail(formData);
 
             if (result && result.success) {
                 setError(null);
                 setSubmitted(true);
-                e.currentTarget.reset();
-                setTimeout(() => setSubmitted(false), 5000);
+                form.reset();
+                setTimeout(() => setSubmitted(false), 6000);
             } else if (result && result.error) {
                 setError(result.error);
             } else {
-                setError('Failed to send message');
+                setError('Failed to send message. Please try again.');
             }
         } catch (err) {
-            // Only set error if we haven't already succeeded
+            console.error("Form submit error:", err);
             setError('Something went wrong. Please try again.');
         } finally {
             setIsSubmitting(false);

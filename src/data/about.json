@@ -2,105 +2,86 @@
     "experience": [
         {
             "title": "Head of Academic and Professional Development",
-            "company": "Himpunan Mahasiswa Sistem Informasi UPNVY",
-            "logo": "https://ui-avatars.com/api/?name=P+I&background=random&color=fff&size=128",
+            "company": "HIMASISFO UPN \"Veteran\" Yogyakarta",
+            "logo": "https://ui-avatars.com/api/?name=H+U&background=0284c7&color=fff&size=128",
             "period": "Mar 2026 - Present",
             "location": "Yogyakarta, ID 🇮🇩",
-            "type": "Organization • Part-time",
+            "type": "Organization • Leadership",
             "responsibilities": [
-                "Developed and maintained backend services using Golang for Parto.id's internal attendance application.",
-                "Implemented efficient data handling and secure API integrations to support daily attendance workflows.",
-                "Collaborated with frontend and product teams to ensure smooth functionality and seamless user experience."
+                "Led the planning and execution of 10+ academic and professional development programs for Information Systems students.",
+                "Managed and coordinated a team of 8 members to organize department programs.",
+                "Initiated improvements in learning quality through student-oriented programs."
             ],
             "learnings": [
-                "Deepened understanding of Go's concurrency model and Clean Architecture within a production environment.",
-                "Gained hands-on experience in implementing Agile Scrum methodologies to streamline development workflows.",
-                "Learned to collaborate effectively within a professional development team to achieve collective project goals."
+                "Strengthened leadership, strategic program management, and cross-functional team coordination.",
+                "Enhanced capabilities in designing curricula and developmental workshops tailored for student growth.",
+                "Mastered stakeholder communication and organizational workflow optimization."
             ],
             "impact": [
-                "Developed core APIs for essential functionalities, including clock-in/out mechanisms and attendance reporting."
+                "Empowered 200+ Information Systems students through targeted workshops, mentoring sessions, and academic preparation programs."
             ]
         },
         {
-            "title": "Backend Golang Developer",
-            "company": "Pt. Affan Technology Indonesia (Parto.id)",
-            "logo": "https://ui-avatars.com/api/?name=P+I&background=random&color=fff&size=128",
-            "period": "Jul 2025 - Sep 2025 • 2 Mos",
-            "location": "Jambi, ID 🇮🇩",
-            "type": "Internship • Hybrid",
+            "title": "Laboratory Assistant",
+            "company": "UPN \"Veteran\" Yogyakarta",
+            "logo": "https://ui-avatars.com/api/?name=L+A&background=10b981&color=fff&size=128",
+            "period": "Jul 2025 - Present",
+            "location": "Yogyakarta, ID 🇮🇩",
+            "type": "Academic • Mentorship",
             "responsibilities": [
-                "Developed and maintained backend services using Golang for Parto.id's internal attendance application.",
-                "Implemented efficient data handling and secure API integrations to support daily attendance workflows.",
-                "Collaborated with frontend and product teams to ensure smooth functionality and seamless user experience."
+                "Guided 90+ students in understanding algorithms, data structures, and database concepts.",
+                "Assisted in lab sessions, including teaching and problem-solving techniques.",
+                "Evaluated student assignments and provided structured feedback to improve learning outcomes."
             ],
             "learnings": [
-                "Deepened understanding of Go's concurrency model and Clean Architecture within a production environment.",
-                "Gained hands-on experience in implementing Agile Scrum methodologies to streamline development workflows.",
-                "Learned to collaborate effectively within a professional development team to achieve collective project goals."
+                "Deepened mastery of core computer science fundamentals, data modeling, and query optimization.",
+                "Refined technical communication and mentoring methodologies for diverse learning paces.",
+                "Strengthened pedagogical and evaluative frameworks for academic assessment."
             ],
             "impact": [
-                "Developed core APIs for essential functionalities, including clock-in/out mechanisms and attendance reporting."
+                "Mentored 90+ students resulting in high practical lab pass rates and elevated comprehension in database and algorithm design."
             ]
         },
         {
-            "title": "Backend Golang Developer",
-            "company": "Pt. Affan Technology Indonesia (Parto.id)",
-            "logo": "https://ui-avatars.com/api/?name=P+I&background=random&color=fff&size=128",
-            "period": "Jul 2025 - Sep 2025 • 2 Mos",
-            "location": "Jambi, ID 🇮🇩",
-            "type": "Internship • Hybrid",
+            "title": "Head of Backend Development",
+            "company": "Code124",
+            "logo": "https://ui-avatars.com/api/?name=C+1&background=6366f1&color=fff&size=128",
+            "period": "Aug 2025 - Jan 2026",
+            "location": "Yogyakarta, ID 🇮🇩",
+            "type": "Project Team • Technical Lead",
             "responsibilities": [
-                "Developed and maintained backend services using Golang for Parto.id's internal attendance application.",
-                "Implemented efficient data handling and secure API integrations to support daily attendance workflows.",
-                "Collaborated with frontend and product teams to ensure smooth functionality and seamless user experience."
+                "Led backend development for 2 organizational web projects.",
+                "Designed database schemas, authentication systems, and backend architecture based on system requirements.",
+                "Collaborated with a team of 4 developers to ensure system quality and maintainability."
             ],
             "learnings": [
-                "Deepened understanding of Go's concurrency model and Clean Architecture within a production environment.",
-                "Gained hands-on experience in implementing Agile Scrum methodologies to streamline development workflows.",
-                "Learned to collaborate effectively within a professional development team to achieve collective project goals."
+                "Gained hands-on experience translating business and system requirements into scalable backend architectures.",
+                "Managed team code reviews, Git version control workflows, and system integration testing.",
+                "Enhanced expertise in relational database schema design and secure authentication mechanisms."
             ],
             "impact": [
-                "Developed core APIs for essential functionalities, including clock-in/out mechanisms and attendance reporting."
-            ]
-        },
-        {
-            "title": "Backend Golang Developer",
-            "company": "Pt. Affan Technology Indonesia (Parto.id)",
-            "logo": "https://ui-avatars.com/api/?name=P+I&background=random&color=fff&size=128",
-            "period": "Jul 2025 - Sep 2025 • 2 Mos",
-            "location": "Jambi, ID 🇮🇩",
-            "type": "Internship • Hybrid",
-            "responsibilities": [
-                "Developed and maintained backend services using Golang for Parto.id's internal attendance application.",
-                "Implemented efficient data handling and secure API integrations to support daily attendance workflows.",
-                "Collaborated with frontend and product teams to ensure smooth functionality and seamless user experience."
-            ],
-            "learnings": [
-                "Deepened understanding of Go's concurrency model and Clean Architecture within a production environment.",
-                "Gained hands-on experience in implementing Agile Scrum methodologies to streamline development workflows.",
-                "Learned to collaborate effectively within a professional development team to achieve collective project goals."
-            ],
-            "impact": [
-                "Developed core APIs for essential functionalities, including clock-in/out mechanisms and attendance reporting."
+                "Successfully delivered 2 complete organizational web platforms with high maintainability, uptime, and secure data handling."
             ]
         }
     ],
     "education": [
         {
-            "school": "Universitas Pembangunan Nasional \"Veteran\" Yogyakarta",
-            "degree": "Bachelor's degree • Information Systems, (S.Kom)",
-            "gpa": "3.84 / 4.00",
-            "logo": "https://ui-avatars.com/api/?name=U+J&background=random&color=fff&size=128",
-            "period": "2024 - 2028",
-            "location": "Yogyakarta, ID 🇮🇩"
+            "school": "UPN \"Veteran\" Yogyakarta",
+            "degree": "Bachelor of Information Systems (S.Kom)",
+            "gpa": "3.85 / 4.00",
+            "logo": "https://ui-avatars.com/api/?name=U+P&background=059669&color=fff&size=128",
+            "period": "2024 - Present",
+            "location": "Yogyakarta, ID 🇮🇩",
+            "coursework": "Software Requirements Engineering, Business Process Management, Database Systems, Algorithms and Data Structures"
         },
         {
             "school": "SMAS Angkasa 1 Halimperdanakusuma",
             "degree": "Mathematics and Natural Sciences",
             "gpa": "-",
-            "logo": "https://ui-avatars.com/api/?name=U+J&background=random&color=fff&size=128",
+            "logo": "https://ui-avatars.com/api/?name=S+A&background=3b82f6&color=fff&size=128",
             "period": "2021 - 2024",
-            "location": "Jakarta, ID 🇮🇩"
+            "location": "Jakarta, ID 🇮🇩",
+            "coursework": "Advanced Mathematics, Natural Sciences, Foundational Logic & Analytics"
         }
     ]
 }

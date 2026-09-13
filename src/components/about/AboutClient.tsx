@@ -155,9 +155,9 @@ export function ExperienceCard({
 }
 
 export function EducationCard({
-    school, degree, gpa, logo, period, location
+    school, degree, gpa, logo, period, location, coursework
 }: {
-    school: string, degree: string, gpa: string, logo: string, period: string, location: string
+    school: string, degree: string, gpa: string, logo: string, period: string, location: string, coursework?: string
 }) {
     return (
         <div className="bg-background border border-border/50 rounded-xl p-4 md:p-6 hover:border-border transition-colors shadow-sm">
@@ -171,7 +171,14 @@ export function EducationCard({
                     <div>
                         <h3 className="text-lg font-bold text-foreground">{school}</h3>
                         <p className="text-sm text-muted-foreground font-medium mt-0.5">{degree}</p>
-                        <p className="text-xs font-semibold text-foreground mt-1 tracking-wide">GPA: {gpa}</p>
+                        {gpa && gpa !== '-' && (
+                            <p className="text-xs font-semibold text-primary mt-1 tracking-wide">GPA: {gpa}</p>
+                        )}
+                        {coursework && (
+                            <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                                <span className="font-semibold text-foreground">Relevant Coursework:</span> {coursework}
+                            </p>
+                        )}
 
                         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-3 text-xs text-muted-foreground">
                             <div className="flex items-center gap-1.5">

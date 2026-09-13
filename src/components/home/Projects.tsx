@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Box } from 'lucide-react';
+import { ArrowUpRight, FolderGit2, Sparkles, Workflow, FileSpreadsheet, Database } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import projectsData from '@/data/projects.json';
@@ -11,6 +11,12 @@ import DetailModal from '@/components/shared/DetailModal';
 interface ProjectsProps {
     limit?: number;
 }
+
+const CATEGORY_ICONS: Record<string, any> = {
+    "Business Analysis & Systems": Workflow,
+    "Product & AI Systems": Sparkles,
+    "Information Systems & Web": Database
+};
 
 export default function Projects({ limit }: ProjectsProps) {
     const [selectedProject, setSelectedProject] = useState<any>(null);
@@ -31,65 +37,79 @@ export default function Projects({ limit }: ProjectsProps) {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {items.map((project, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.8, delay: index * 0.1 }}
-                            onClick={() => setSelectedProject(project)}
-                            className="group flex flex-col bg-card border border-border rounded-3xl overflow-hidden card-hover cursor-pointer"
-                        >
-                            <div className="aspect-video bg-muted relative overflow-hidden">
-                                {project.image ? (
-                                    <Image 
-                                        src={project.image} 
-                                        alt={project.title} 
-                                        fill
-                                        unoptimized
-                                        className="object-cover group-hover:scale-110 transition-transform duration-700"
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    />
-                                ) : (
-                                    <div className="absolute inset-0 flex items-center justify-center text-muted-foreground font-mono text-xs uppercase tracking-widest">
-                                        {project.title.split(' ').join('_')}
-                                    </div>
-                                )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-60" />
-                            </div>
+                    {items.map((project: any, index: number) => {
+                        const IconComponent = CATEGORY_ICONS[project.category] || FolderGit2;
 
-                            <div className="p-6 md:p-8 flex-1 flex flex-col">
-                                <div className="flex justify-between items-start mb-4">
-                                    <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
-                                        {project.title}
-                                    </h3>
-                                    <span className="text-xs font-mono bg-muted px-2 py-1 rounded text-muted-foreground shrink-0 ml-2">{project.year}</span>
-                                </div>
-
-                                <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6 line-clamp-2">
-                                    {project.description}
-                                </p>
-
-                                <div className="flex flex-wrap gap-2 mb-8 mt-auto">
-                                    {project.stack.slice(0, 3).map((tech) => (
-                                        <span key={tech} className="px-2 py-1 bg-muted/50 text-[10px] font-bold uppercase tracking-widest rounded-md">
-                                            {tech}
-                                        </span>
-                                    ))}
-                                    {project.stack.length > 3 && (
-                                        <span className="px-2 py-1 text-[10px] font-bold text-muted-foreground">+{project.stack.length - 3}</span>
+                        return (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-100px" }}
+                                transition={{ duration: 0.8, delay: index * 0.1 }}
+                                onClick={() => setSelectedProject(project)}
+                                className="group flex flex-col bg-card border border-border rounded-3xl overflow-hidden card-hover cursor-pointer"
+                            >
+                                <div className="aspect-video bg-gradient-to-br from-primary/10 via-muted/50 to-muted/20 relative overflow-hidden flex items-center justify-center p-6 border-b border-border/40">
+                                    {project.image ? (
+                                        <Image 
+                                            src={project.image} 
+                                            alt={project.title} 
+                                            fill
+                                            unoptimized
+                                            className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        />
+                                    ) : (
+                                        <div className="flex flex-col items-center justify-center text-center gap-3">
+                                            <div className="p-4 rounded-2xl bg-background/80 border border-border/60 text-primary group-hover:scale-110 group-hover:text-foreground transition-all duration-500 shadow-sm">
+                                                <IconComponent size={32} />
+                                            </div>
+                                            {project.category && (
+                                                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground bg-background/60 px-3 py-1 rounded-full border border-border/40">
+                                                    {project.category}
+                                                </span>
+                                            )}
+                                        </div>
                                     )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-40 pointer-events-none" />
                                 </div>
 
-                                <div className="pt-4 border-t border-border">
-                                    <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground group-hover:gap-4 transition-all">
-                                        View Details <ArrowUpRight className="w-4 h-4" />
+                                <div className="p-6 md:p-8 flex-1 flex flex-col">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                                            {project.title}
+                                        </h3>
+                                        <span className="text-xs font-mono bg-muted px-2 py-1 rounded text-muted-foreground shrink-0 ml-2 font-semibold">{project.year}</span>
+                                    </div>
+
+                                    {project.subtitle && (
+                                        <p className="text-xs font-medium text-primary mb-3">
+                                            {project.subtitle}
+                                        </p>
+                                    )}
+
+                                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
+                                        {project.description}
+                                    </p>
+
+                                    <div className="flex flex-wrap gap-2 mb-8 mt-auto">
+                                        {project.stack.map((tech: string) => (
+                                            <span key={tech} className="px-2.5 py-1 bg-muted/60 text-[10px] font-bold uppercase tracking-wider rounded-md text-foreground">
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    <div className="pt-4 border-t border-border">
+                                        <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground group-hover:gap-4 transition-all">
+                                            View Details <ArrowUpRight className="w-4 h-4 text-primary" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        );
+                    })}
                 </div>
 
                 {limit && (
@@ -111,7 +131,7 @@ export default function Projects({ limit }: ProjectsProps) {
                 github={selectedProject?.github}
                 live={selectedProject?.live}
                 image={selectedProject?.image}
-                icon={<Box size={24} />}
+                icon={<FolderGit2 size={24} />}
             />
         </section>
     );

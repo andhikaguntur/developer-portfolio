@@ -2,9 +2,16 @@ import type { Metadata } from "next";
 import Achievements from '@/components/home/Achievements';
 
 export const metadata: Metadata = {
-  title: "Achievements | Andhika Guntur - Milestones",
-  description: "A comprehensive look at the professional achievements, certifications, and academic success of Andhika Guntur.",
-  keywords: ["Achievements", "Milestones", "Certifications", "Software Engineer Success"],
+  title: "Achievements | Andhika Guntur - Certifications & Honors",
+  description: "Explore the professional certifications (BNSP Junior Web Developer), hackathons (COMPFEST, Refactory x UGM), and academic achievements of Andhika Guntur Ramadan.",
+  keywords: [
+    "Achievements",
+    "BNSP Certification",
+    "Junior Web Developer",
+    "COMPFEST Data Analytic Dash",
+    "Refactory Hackathon",
+    "Andhika Guntur"
+  ],
 };
 
 export default function AchievementsPage() {

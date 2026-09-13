@@ -1,23 +1,26 @@
 import type { Metadata } from "next";
 import Hero from "@/components/home/Hero";
-import Comments from "@/components/home/Comments";
 
 export const metadata: Metadata = {
-  title: "Andhika Guntur | Full-Stack Developer & Software Engineer",
-  description: "Explore the professional portfolio of Andhika Guntur, a Full-Stack Developer specializing in React, Next.js, and Golang. Delivering elegant digital experiences.",
-  keywords: ["Full-Stack Developer", "Software Engineer", "React", "Next.js", "Golang", "Web Development", "Portfolio"],
+  title: "Andhika Guntur | Aspiring IT Business Analyst & Digital Solutions",
+  description: "Explore the portfolio of Andhika Guntur Ramadan, Information Systems undergraduate at UPN \"Veteran\" Yogyakarta with interests in Business Process Analysis (BPMN), Requirements Engineering (SRS/PRD), Database Systems, and Digital Solutions.",
+  keywords: [
+    "Andhika Guntur",
+    "Aspiring IT Business Analyst",
+    "IT Business Analyst Intern",
+    "Information Systems",
+    "Requirements Engineering",
+    "Business Process Modeling",
+    "BPMN",
+    "System Design",
+    "UPN Veteran Yogyakarta",
+    "Portfolio"
+  ],
   openGraph: {
-    title: "Andhika Guntur | Full-Stack Developer",
-    description: "Professional portfolio showcasing modern web applications and technical expertise.",
-    url: "https://andhikaguntur.dev", // Replace with actual URL if known
+    title: "Andhika Guntur | Aspiring IT Business Analyst & Digital Solutions",
+    description: "Information Systems undergraduate specializing in Business Process Analysis, Requirements Engineering, and System Design.",
+    url: "https://andhikaguntur.dev",
     siteName: "Andhika Guntur Portfolio",
-    images: [
-      {
-        url: "/og-image.jpg", // Replace with actual image path
-        width: 1200,
-        height: 630,
-      },
-    ],
     locale: "en_US",
     type: "website",
   }
@@ -27,8 +30,6 @@ export default function Home() {
   return (
     <div className="w-full flex flex-col items-center justify-start">
       <Hero />
-      <Comments />
     </div>
   );
 }
-
