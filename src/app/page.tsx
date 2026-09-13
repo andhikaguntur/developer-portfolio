@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Andhika Guntur | Aspiring IT Business Analyst & Digital Solutions",
     description: "Information Systems undergraduate specializing in Business Process Analysis, Requirements Engineering, and System Design.",
-    url: "https://andhikaguntur.dev",
+    url: "https://andhikaguntur.vercel.app",
     siteName: "Andhika Guntur Portfolio",
     locale: "en_US",
     type: "website",

@@ -7,13 +7,13 @@ import { sendEmail } from '@/app/actions/contact';
 
 const SOCIALS = [
     { name: 'GitHub', href: 'https://github.com/andhikaguntur', icon: Github },
-    { name: 'Instagram', href: 'https://instagram.com/andhikaguntur', icon: Instagram },
+    { name: 'Instagram', href: 'https://instagram.com/andhika.guntur', icon: Instagram },
     { name: 'LinkedIn', href: 'https://linkedin.com/in/andhika-guntur', icon: Linkedin },
 ];
 
 export function ContactInfo() {
     return (
-        <motion.div 
+        <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -114,7 +114,7 @@ export function ContactForm() {
     };
 
     return (
-        <motion.div 
+        <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -124,9 +124,9 @@ export function ContactForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                         <label htmlFor="name" className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Name</label>
-                        <input 
-                            type="text" 
-                            id="name" 
+                        <input
+                            type="text"
+                            id="name"
                             name="name"
                             required
                             className="w-full bg-muted/20 border border-border/50 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
@@ -135,9 +135,9 @@ export function ContactForm() {
                     </div>
                     <div className="space-y-2">
                         <label htmlFor="email" className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Email</label>
-                        <input 
-                            type="email" 
-                            id="email" 
+                        <input
+                            type="email"
+                            id="email"
                             name="email"
                             required
                             className="w-full bg-muted/20 border border-border/50 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
@@ -145,12 +145,12 @@ export function ContactForm() {
                         />
                     </div>
                 </div>
-                
+
                 <div className="space-y-2">
                     <label htmlFor="subject" className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Subject</label>
-                    <input 
-                        type="text" 
-                        id="subject" 
+                    <input
+                        type="text"
+                        id="subject"
                         name="subject"
                         required
                         className="w-full bg-muted/20 border border-border/50 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
@@ -160,8 +160,8 @@ export function ContactForm() {
 
                 <div className="space-y-2">
                     <label htmlFor="message" className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Message</label>
-                    <textarea 
-                        id="message" 
+                    <textarea
+                        id="message"
                         name="message"
                         rows={5}
                         required
@@ -171,7 +171,7 @@ export function ContactForm() {
                 </div>
 
                 {error && (
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         className="text-red-500 text-sm font-medium bg-red-500/10 p-3 rounded-xl border border-red-500/20"
@@ -180,7 +180,7 @@ export function ContactForm() {
                     </motion.div>
                 )}
 
-                <motion.button 
+                <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"

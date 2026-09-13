@@ -110,8 +110,8 @@ export default function Achievements({ limit }: AchievementsProps) {
             <DetailModal 
                 isOpen={!!selectedAchievement}
                 onClose={() => setSelectedAchievement(null)}
-                title={selectedAchievement?.title}
-                description={selectedAchievement?.description}
+                title={selectedAchievement?.title ?? ""}
+                description={selectedAchievement?.description ?? ""}
                 year={selectedAchievement?.year}
                 organization={selectedAchievement?.organization}
                 github={selectedAchievement?.github}

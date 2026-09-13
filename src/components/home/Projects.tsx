@@ -54,9 +54,9 @@ export default function Projects({ limit }: ProjectsProps) {
                                 className="group flex flex-col bg-card border border-border rounded-3xl overflow-hidden card-hover cursor-pointer"
                             >
                                 <div className="aspect-video bg-muted relative overflow-hidden flex items-center justify-center border-b border-border/40">
-                                    <Image 
-                                        src={project.image || "/assets/projects/sad.png"} 
-                                        alt={project.title} 
+                                    <Image
+                                        src={project.image || "/assets/projects/sad.png"}
+                                        alt={project.title}
                                         fill
                                         unoptimized
                                         className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -111,11 +111,11 @@ export default function Projects({ limit }: ProjectsProps) {
                 )}
             </div>
 
-            <DetailModal 
+            <DetailModal
                 isOpen={!!selectedProject}
                 onClose={() => setSelectedProject(null)}
-                title={selectedProject?.title}
-                description={selectedProject?.description}
+                title={selectedProject?.title ?? ""}
+                description={selectedProject?.description ?? ""}
                 year={selectedProject?.year}
                 stack={selectedProject?.stack}
                 github={selectedProject?.github}

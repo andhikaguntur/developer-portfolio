@@ -27,7 +27,7 @@ import {
 
 const SOCIALS = [
     { name: 'GitHub', href: 'https://github.com/andhikaguntur', icon: Github },
-    { name: 'Instagram', href: 'https://instagram.com/andhikaguntur', icon: Instagram },
+    { name: 'Instagram', href: 'https://instagram.com/andhika.guntur', icon: Instagram },
     { name: 'LinkedIn', href: 'https://linkedin.com/in/andhika-guntur', icon: Linkedin },
 ];
 
