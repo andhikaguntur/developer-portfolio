@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, FolderGit2, Sparkles, Workflow, FileSpreadsheet, Database } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import projectsData from '@/data/projects.json';
@@ -11,12 +11,6 @@ import DetailModal from '@/components/shared/DetailModal';
 interface ProjectsProps {
     limit?: number;
 }
-
-const CATEGORY_ICONS: Record<string, any> = {
-    "Business Analysis & Systems": Workflow,
-    "Product & AI Systems": Sparkles,
-    "Information Systems & Web": Database
-};
 
 export default function Projects({ limit }: ProjectsProps) {
     const [selectedProject, setSelectedProject] = useState<any>(null);
@@ -38,8 +32,6 @@ export default function Projects({ limit }: ProjectsProps) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {items.map((project: any, index: number) => {
-                        const IconComponent = CATEGORY_ICONS[project.category] || FolderGit2;
-
                         return (
                             <motion.div
                                 key={index}
@@ -50,29 +42,16 @@ export default function Projects({ limit }: ProjectsProps) {
                                 onClick={() => setSelectedProject(project)}
                                 className="group flex flex-col bg-card border border-border rounded-3xl overflow-hidden card-hover cursor-pointer"
                             >
-                                <div className="aspect-video bg-gradient-to-br from-primary/10 via-muted/50 to-muted/20 relative overflow-hidden flex items-center justify-center p-6 border-b border-border/40">
-                                    {project.image ? (
-                                        <Image 
-                                            src={project.image} 
-                                            alt={project.title} 
-                                            fill
-                                            unoptimized
-                                            className="object-cover group-hover:scale-110 transition-transform duration-700"
-                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                        />
-                                    ) : (
-                                        <div className="flex flex-col items-center justify-center text-center gap-3">
-                                            <div className="p-4 rounded-2xl bg-background/80 border border-border/60 text-primary group-hover:scale-110 group-hover:text-foreground transition-all duration-500 shadow-sm">
-                                                <IconComponent size={32} />
-                                            </div>
-                                            {project.category && (
-                                                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground bg-background/60 px-3 py-1 rounded-full border border-border/40">
-                                                    {project.category}
-                                                </span>
-                                            )}
-                                        </div>
-                                    )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-40 pointer-events-none" />
+                                <div className="aspect-video bg-muted relative overflow-hidden flex items-center justify-center border-b border-border/40">
+                                    <Image 
+                                        src={project.image || "/assets/projects/sad.png"} 
+                                        alt={project.title} 
+                                        fill
+                                        unoptimized
+                                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-card/60 via-transparent to-transparent opacity-40 pointer-events-none" />
                                 </div>
 
                                 <div className="p-6 md:p-8 flex-1 flex flex-col">
@@ -130,8 +109,7 @@ export default function Projects({ limit }: ProjectsProps) {
                 stack={selectedProject?.stack}
                 github={selectedProject?.github}
                 live={selectedProject?.live}
-                image={selectedProject?.image}
-                icon={<FolderGit2 size={24} />}
+                image={selectedProject?.image || "/assets/projects/sad.png"}
             />
         </section>
     );

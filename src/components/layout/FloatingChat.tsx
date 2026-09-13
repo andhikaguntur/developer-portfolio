@@ -5,6 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, Bot, Sparkles, Loader2 } from 'lucide-react';
 import { sendChatMessage, ChatMessage } from '@/app/actions/chat';
 
+const renderMessageContent = (content: string) => {
+    const parts = content.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part, i) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+            return <strong key={i} className="font-semibold">{part.slice(2, -2)}</strong>;
+        }
+        return part;
+    });
+};
+
 export default function FloatingChat() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<ChatMessage[]>([
@@ -21,12 +31,12 @@ export default function FloatingChat() {
 
     useEffect(() => {
         const types: ('shiver' | 'spin' | 'jump' | 'dance')[] = ['shiver', 'spin', 'jump', 'dance'];
-        
+
         const idleInterval = setInterval(() => {
             if (!isOpen && !isJumping) {
                 const randomType = types[Math.floor(Math.random() * types.length)];
                 setIdleType(randomType);
-                
+
                 setTimeout(() => {
                     setIdleType('none');
                 }, 1500);
@@ -58,9 +68,9 @@ export default function FloatingChat() {
             const dist = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 800);
             const ratio = dist / 800;
             const easedRatio = 1 - Math.pow(1 - ratio, 3);
-            setEyePosition({ 
-                x: Math.cos(angle) * 12 * easedRatio, 
-                y: Math.sin(angle) * 12 * easedRatio 
+            setEyePosition({
+                x: Math.cos(angle) * 12 * easedRatio,
+                y: Math.sin(angle) * 12 * easedRatio
             });
         };
 
@@ -141,7 +151,7 @@ export default function FloatingChat() {
                                         </div>
                                     )}
                                     <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm shadow-sm ${msg.role === 'user' ? 'bg-primary text-primary-foreground rounded-br-sm' : 'bg-background border border-border/50 text-foreground rounded-bl-sm'}`}>
-                                        {msg.content}
+                                        {renderMessageContent(msg.content)}
                                     </div>
                                 </div>
                             ))}
@@ -331,18 +341,18 @@ export default function FloatingChat() {
     );
 }
 
-function MochikaEye({ side, idleType, isJumping }: { 
-    side: 'left' | 'right', 
-    idleType: string, 
-    isJumping: boolean 
+function MochikaEye({ side, idleType, isJumping }: {
+    side: 'left' | 'right',
+    idleType: string,
+    isJumping: boolean
 }) {
     const isHappy = idleType === 'jump' || isJumping;
     const isExcited = idleType === 'spin';
-    
+
     // Rotations for ^ ^
     const rot1 = isHappy ? -45 : (isExcited ? (side === 'left' ? 45 : -45) : 0);
     const rot2 = isHappy ? 45 : (isExcited ? (side === 'left' ? -45 : 45) : 0);
-    
+
     // Positions
     const x1 = isHappy ? -3 : 0;
     const x2 = isHappy ? 3 : 0;

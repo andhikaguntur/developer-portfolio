@@ -62,7 +62,7 @@ export default function RootLayout({
 
                   {/* Document Footer/Branding (optional) */}
                   <div className="border-t border-border/50 p-6 flex justify-between items-center text-[10px] text-muted-foreground uppercase tracking-widest bg-muted/5">
-                    <span>Antigravity Portfolio 2026</span>
+                    <span>Portfolio 2026</span>
                     <span>Property of developer</span>
                   </div>
                 </div>

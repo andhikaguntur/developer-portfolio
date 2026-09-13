@@ -34,6 +34,7 @@ export function SpotlightImage() {
                 src={dudukPng}
                 alt="Andhika Guntur Profile Base"
                 fill
+                sizes="(max-width: 768px) 100vw, 384px"
                 className="object-cover object-top filter grayscale transition-transform duration-700 group-hover:scale-[1.03]"
                 priority
             />
@@ -50,6 +51,7 @@ export function SpotlightImage() {
                     src={dudukPng}
                     alt="Andhika Guntur Profile Colored"
                     fill
+                    sizes="(max-width: 768px) 100vw, 384px"
                     className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
                     priority
                 />

@@ -107,9 +107,9 @@ function MiniMochika() {
             initial={{ y: 80, x: -20, rotate: 20, scale: 0.8 }}
             animate={{ y: -20, x: 20, rotate: 5, scale: 1 }}
             exit={{ y: 80, x: -20, rotate: 20, scale: 0.8 }}
-            transition={{ 
-                type: "spring", 
-                stiffness: 300, 
+            transition={{
+                type: "spring",
+                stiffness: 300,
                 damping: 15,
                 mass: 0.8
             }}
@@ -128,7 +128,7 @@ function MiniMochika() {
 
             {/* Mochika Body */}
             <div className="w-20 h-20 bg-gradient-to-b from-white via-zinc-100 to-zinc-300 rounded-2xl border border-white/60 shadow-[0_10px_20px_rgba(0,0,0,0.2),inset_0_-8px_16px_rgba(0,0,0,0.1),inset_0_8px_16px_rgba(255,255,255,0.9)] relative flex items-center justify-center overflow-visible">
-                
+
                 {/* Antenna */}
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-1 h-5 bg-zinc-400 rounded-full origin-bottom">
                     <div className="absolute -top-1.5 -left-[3px] w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
@@ -137,7 +137,7 @@ function MiniMochika() {
                 {/* Face / Visor */}
                 <div className="w-[50px] h-[30px] bg-zinc-900 rounded-[12px] flex items-center justify-center relative shadow-[inset_0_2px_8px_rgba(0,0,0,0.9)] overflow-hidden">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[50%] bg-gradient-to-b from-white/20 to-transparent rounded-b-full blur-[1px]" />
-                    
+
                     {/* Glowing Eyes */}
                     <div className="flex gap-2.5">
                         <div className="w-[7px] h-[11px] bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.9)] animate-pulse" />
@@ -196,7 +196,7 @@ export default function Hero() {
                             <TypewriterEffect text="Andhika Guntur" />
                         </h1>
                         <p className="text-xs font-semibold text-primary tracking-wider uppercase mt-0.5">
-                            Andhika Guntur Ramadan
+                            Information Systems Student
                         </p>
                         <div className="flex items-center justify-center md:justify-start gap-3 mt-2">
                             {SOCIALS.map((social) => (

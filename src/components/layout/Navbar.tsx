@@ -3,15 +3,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
-import { 
-    Sun, 
-    Moon, 
-    Menu, 
-    X, 
-    Home, 
-    User, 
-    Trophy, 
-    Briefcase, 
+import {
+    Sun,
+    Moon,
+    Menu,
+    X,
+    Home,
+    User,
+    Trophy,
+    Briefcase,
     Mail,
     Github,
     Instagram,
@@ -69,7 +69,7 @@ export default function Navbar() {
                 {/* Brand / Logo */}
                 <div className="flex items-center">
                     <Link href="/" className="text-xl font-bold font-heading tracking-tighter hover:opacity-80 transition-opacity">
-                        ANTIGRAVITY<span className="text-primary">.</span>
+                        PORTFOLIO<span className="text-primary">.</span>
                     </Link>
                 </div>
 
@@ -110,7 +110,7 @@ export default function Navbar() {
             {/* Mobile Header */}
             <header className="lg:hidden fixed top-0 left-0 right-0 h-16 border-b border-border bg-background/80 backdrop-blur-md z-50 px-6 flex items-center justify-between">
                 <Link href="/" className="text-xl font-bold font-heading tracking-tighter">
-                    ANTIGRAVITY<span className="text-primary">.</span>
+                    PORTFOLIO<span className="text-primary">.</span>
                 </Link>
                 <div className="flex items-center gap-4">
                     <ThemeToggle />
@@ -149,7 +149,7 @@ export default function Navbar() {
                             </div>
 
                             {/* Removed profile photo from mobile sidebar as per request "foto profil nya bisa dihilangkan saja" */}
-                            
+
                             <nav className="flex flex-col gap-2 mt-4">
                                 {NAV_ITEMS.map((item) => (
                                     <Link
@@ -158,8 +158,8 @@ export default function Navbar() {
                                         onClick={() => setMobileMenuOpen(false)}
                                         className={cn(
                                             'flex items-center gap-4 p-4 rounded-2xl transition-all',
-                                            isActive(item.href) 
-                                                ? 'bg-primary/10 text-primary font-bold' 
+                                            isActive(item.href)
+                                                ? 'bg-primary/10 text-primary font-bold'
                                                 : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                                         )}
                                     >

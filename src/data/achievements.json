@@ -3,9 +3,9 @@
         "id": 1,
         "year": "2025",
         "title": "Junior Web Developer Certification",
-        "organization": "Badan Nasional Sertifikasi Profesi (BNSP)",
-        "description": "Nationally certified Junior Web Developer by BNSP Indonesia, validating industry competencies in structured web development, software engineering standards, and clean code practices.",
-        "icon": "Award"
+        "organization": "BPSDMP Komdigi Yogyakarta",
+        "description": "Participated in Vocational School Graduate Academy (VSGA) Digital Talent Scholarship 2025 certification program in Junior Web Developer specialization, organized by the Human Resource Development Agency (BPSDMP) and the Ministry of Communication and Informatics of the Republic of Indonesia. Achieved professional certification.",
+        "image": "/assets/achievements/vsgaweb.png"
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "title": "COMPFEST Data Analytic Dash Participant",
         "organization": "COMPFEST Universitas Indonesia",
         "description": "Participated in the competitive nationwide Data Analytic Dash competition, performing business data analysis, analytical modeling, and deriving actionable insights.",
-        "icon": "Trophy"
+        "image": "/assets/achievements/compfest.png"
     },
     {
         "id": 3,
@@ -21,14 +21,14 @@
         "title": "Refactory Hackathon x UGM Participant",
         "organization": "Refactory x Universitas Gadjah Mada",
         "description": "Participated in an intensive hackathon solving real-world digital challenge scenarios and designing scalable digital solution architectures in collaboration with developers.",
-        "icon": "Star"
+        "image": "/assets/achievements/refactory.png"
     },
     {
         "id": 4,
-        "year": "2024 - Present",
-        "title": "Academic Distinction (GPA: 3.85 / 4.00)",
-        "organization": "UPN \"Veteran\" Yogyakarta",
-        "description": "Maintained outstanding academic performance with a 3.85 Cumulative GPA in Information Systems, excelling in Requirements Engineering, BPM, and Database Systems.",
-        "icon": "Briefcase"
+        "year": "2024",
+        "title": "Alibaba Cloud Certification",
+        "organization": "Alibaba Cloud",
+        "description": "Acquired professional certification in cloud computing fundamentals and practical Alibaba Cloud services, enhancing skills in scalable infrastructure and cloud-based solution development.",
+        "image": "/assets/achievements/alibaba.png"
     }
 ]

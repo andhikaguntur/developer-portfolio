@@ -3,7 +3,7 @@
         {
             "title": "Head of Academic and Professional Development",
             "company": "HIMASISFO UPN \"Veteran\" Yogyakarta",
-            "logo": "https://ui-avatars.com/api/?name=H+U&background=0284c7&color=fff&size=128",
+            "logo": "/assets/logoExp/sisfo.jpg",
             "period": "Mar 2026 - Present",
             "location": "Yogyakarta, ID 🇮🇩",
             "type": "Organization • Leadership",
@@ -18,13 +18,13 @@
                 "Mastered stakeholder communication and organizational workflow optimization."
             ],
             "impact": [
-                "Empowered 200+ Information Systems students through targeted workshops, mentoring sessions, and academic preparation programs."
+                "Empowered 200+ Information Systems students through targeted academic forums, mentoring sessions, and academic preparation programs."
             ]
         },
         {
             "title": "Laboratory Assistant",
             "company": "UPN \"Veteran\" Yogyakarta",
-            "logo": "https://ui-avatars.com/api/?name=L+A&background=10b981&color=fff&size=128",
+            "logo": "/assets/logoExp/labjif.png",
             "period": "Jul 2025 - Present",
             "location": "Yogyakarta, ID 🇮🇩",
             "type": "Academic • Mentorship",
@@ -45,7 +45,7 @@
         {
             "title": "Head of Backend Development",
             "company": "Code124",
-            "logo": "https://ui-avatars.com/api/?name=C+1&background=6366f1&color=fff&size=128",
+            "logo": "/assets/logoExp/code124.png",
             "period": "Aug 2025 - Jan 2026",
             "location": "Yogyakarta, ID 🇮🇩",
             "type": "Project Team • Technical Lead",
@@ -69,7 +69,7 @@
             "school": "UPN \"Veteran\" Yogyakarta",
             "degree": "Bachelor of Information Systems (S.Kom)",
             "gpa": "3.85 / 4.00",
-            "logo": "https://ui-avatars.com/api/?name=U+P&background=059669&color=fff&size=128",
+            "logo": "/assets/logoExp/upnyk.png",
             "period": "2024 - Present",
             "location": "Yogyakarta, ID 🇮🇩",
             "coursework": "Software Requirements Engineering, Business Process Management, Database Systems, Algorithms and Data Structures"
@@ -78,7 +78,7 @@
             "school": "SMAS Angkasa 1 Halimperdanakusuma",
             "degree": "Mathematics and Natural Sciences",
             "gpa": "-",
-            "logo": "https://ui-avatars.com/api/?name=S+A&background=3b82f6&color=fff&size=128",
+            "logo": "/assets/logoExp/sky.png",
             "period": "2021 - 2024",
             "location": "Jakarta, ID 🇮🇩",
             "coursework": "Advanced Mathematics, Natural Sciences, Foundational Logic & Analytics"

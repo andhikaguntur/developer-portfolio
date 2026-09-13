@@ -3,27 +3,43 @@
         "title": "CV Sumber Anugerah Diesel",
         "subtitle": "Business Process Analysis & Requirements Engineering",
         "description": "Conducted in-depth business process analysis and modeled complete operational workflows using BPMN. Developed a comprehensive Software Requirements Specification (SRS) document based on business and functional requirements, proposing robust digital solutions to improve operational efficiency in construction equipment rental processes.",
-        "stack": ["BPMN", "Requirement Analysis", "SRS Documentation", "System Design", "Process Optimization"],
+        "stack": [
+            "BPMN",
+            "Requirement Analysis",
+            "SRS Documentation",
+            "System Design",
+            "Process Optimization"
+        ],
         "github": "https://github.com/andhikaguntur",
         "year": "2026",
-        "category": "Business Analysis & Systems"
+        "image": "/assets/projects/sad.png"
     },
     {
         "title": "Repoly – GitHub Repo Analyzer & Visualizer",
         "subtitle": "AI-Powered Repo Analyzer & Low-Poly Tech Stack Visualizer",
-        "description": "Conducted thorough user and business needs analysis to define product objectives and functional requirements. Developed the complete Product Requirements Document (PRD) and contributed to the specification of an AI-powered repository analysis platform. Collaborated in designing a low-poly visualization system to improve understanding of software technology stacks.",
-        "stack": ["Product Requirements (PRD)", "Business Analysis", "AI Analysis", "UI/UX Modeling", "Git"],
+        "description": "Developed the complete Product Requirements Document (PRD) and contributed to the specification of an AI-powered repository analysis platform. Collaborated in designing a low-poly visualization system to improve understanding of software technology stacks with 3 team members.",
+        "stack": [
+            "Product Requirements (PRD)",
+            "Business Analysis",
+            "AI Analysis",
+            "Git"
+        ],
         "github": "https://github.com/andhikaguntur",
         "year": "2026",
-        "category": "Product & AI Systems"
+        "image": "/assets/projects/repoly.png"
     },
     {
         "title": "HIMASISFO UPNYK Website",
         "subtitle": "Student Council Information System",
-        "description": "Conducted requirements analysis and contributed to the technical solution design for the student council website. Designed database schemas, authentication mechanisms, and backend architecture based on organizational requirements, collaborating closely with stakeholders to translate organizational needs into scalable system features.",
-        "stack": ["Requirement Engineering", "Database Design", "SQL", "Backend Architecture", "PHP", "Web Dev"],
+        "description": "Contributed to the technical solution design for the student council website. Designed database schemas, authentication mechanisms, and backend architecture based on organizational requirements, collaborating closely with stakeholders to translate organizational needs into scalable system features.",
+        "stack": [
+            "Database Design",
+            "SQL",
+            "Backend Architecture",
+            "PHP"
+        ],
         "github": "https://github.com/andhikaguntur",
         "year": "2025",
-        "category": "Information Systems & Web"
+        "image": "/assets/projects/himasisfo.png"
     }
 ]
